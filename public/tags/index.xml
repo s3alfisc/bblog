@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Wild Econometrics &amp; R</title>
+    <link>s3alfisc.github.io/blog/tags/</link>
+    <description>Recent content in Tags on Wild Econometrics &amp; R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="s3alfisc.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI</title>
+      <link>s3alfisc.github.io/blog/tags/ci/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github actions</title>
+      <link>s3alfisc.github.io/blog/tags/github-actions/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Julia</title>
+      <link>s3alfisc.github.io/blog/tags/julia/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/julia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>s3alfisc.github.io/blog/tags/r/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>econometrics</title>
+      <link>s3alfisc.github.io/blog/tags/econometrics/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/econometrics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>statistical inference</title>
+      <link>s3alfisc.github.io/blog/tags/statistical-inference/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/statistical-inference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wild cluster bootstrap</title>
+      <link>s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

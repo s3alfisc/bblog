@@ -1,0 +1,25 @@
+---
+date: "2019-05-28"
+title: About
+type: section
+---
+
+This is my private blog, in which I post about wild things in R and econometrics. I have a background in economics and work as a data scientist in Düsseldorf, Germany. 
+
+## Projects 
+
+I have contributed to these R packages: 
+
+
++ [fwildclusterboot](https://github.com/s3alfisc/fwildclusterboot)
+ implements the fast wild cluster bootstrap algorithm for OLS from Roodman et al (2019) in R. [![CRAN status](https://www.r-pkg.org/badges/version/fwildclusterboot)](https://CRAN.R-project.org/package=fwildclusterboot) ![runiverse-package](https://s3alfisc.r-universe.dev/badges/fwildclusterboot) `r badger::badge_cran_download("fwildclusterboot", "grand-total", "blue")` `r badger::badge_cran_download("fwildclusterboot", "last-month", "green")`
+
++ [wildboottestjlr](https://github.com/s3alfisc/wildboottestjlr) is an R port of [WildBootTests.jl](https://github.com/droodman/WildBootTests.jl), which implements the fast wild cluster bootstrap for OLS/IV in Julia. 
+
+
+
+You can find me on [GitHub](https://github.com/s3alfisc) and [r-universe](https://s3alfisc.r-universe.dev/ui#builds).
+
+## Other R-blogs 
+
+You can find other R blogs on [r-bloggers.com](https://r-bloggers.com).
