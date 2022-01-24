@@ -1,5 +1,4 @@
 baseurl: https://s3alfisc.github.io/blog/ 
-publishDir: https://s3alfisc.github.io/blog/ 
 title: Wild Econometrics & R
 author: Alexander Fischer
 canonifyurls: yes
