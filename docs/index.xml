@@ -13,8 +13,7 @@
       <pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/post/2022-01-24-hosting-a-blogdown-blog-on-github-pages/</guid>
-      <description>I have recently moved from building this blog via the distill package to blogdown. The main reason for this is that, at the time of writing, distill does not support full RSS feeds for multiple articles. Deploying the distill based blog via github pages was quite straightforward, but doing so for the blogdown based blog proved to be quite cumbersome.
-While there are many good blog posts on deploying blogdown-blogs on github pages, many users tend to run into problems, as this stackoverflow thread with 100+ upvotes shows.</description>
+      <description>I have recently moved from building this blog via the distill package to blogdown. The main reason for this is that, at the time of writing, distill does not support full RSS feeds for multiple articles, which is a requirement to linking my blog to R-bloggers. Deploying the distill based blog via github pages was quite straightforward, but doing so for the blogdown based blog proved to be slightly more cumbersome.</description>
     </item>
     
     <item>
