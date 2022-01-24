@@ -1,4 +1,4 @@
-baseurl: s3alfisc.netlify.com/
+baseurl: https://s3alfisc.github.io/blog/ 
 title: Wild Econometrics & R
 author: Alexander Fischer
 canonifyurls: yes

@@ -2,71 +2,71 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Wild Econometrics &amp; R</title>
-    <link>s3alfisc.netlify.com/categories/</link>
+    <link>https://s3alfisc.github.io/blog/categories/</link>
     <description>Recent content in Categories on Wild Econometrics &amp; R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="s3alfisc.netlify.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CI</title>
-      <link>s3alfisc.netlify.com/categories/ci/</link>
+      <link>https://s3alfisc.github.io/blog/categories/ci/</link>
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/ci/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/ci/</guid>
       <description></description>
     </item>
     
     <item>
       <title>github actions</title>
-      <link>s3alfisc.netlify.com/categories/github-actions/</link>
+      <link>https://s3alfisc.github.io/blog/categories/github-actions/</link>
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/github-actions/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/github-actions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Julia</title>
-      <link>s3alfisc.netlify.com/categories/julia/</link>
+      <link>https://s3alfisc.github.io/blog/categories/julia/</link>
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/julia/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/julia/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>s3alfisc.netlify.com/categories/r/</link>
+      <link>https://s3alfisc.github.io/blog/categories/r/</link>
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/r/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>econometrics</title>
-      <link>s3alfisc.netlify.com/categories/econometrics/</link>
+      <link>https://s3alfisc.github.io/blog/categories/econometrics/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/econometrics/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/econometrics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>statistical inference</title>
-      <link>s3alfisc.netlify.com/categories/statistical-inference/</link>
+      <link>https://s3alfisc.github.io/blog/categories/statistical-inference/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/statistical-inference/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/statistical-inference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wild cluster bootstrap</title>
-      <link>s3alfisc.netlify.com/categories/wild-cluster-bootstrap/</link>
+      <link>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>s3alfisc.netlify.com/categories/wild-cluster-bootstrap/</guid>
+      <guid>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</guid>
       <description></description>
     </item>
     
