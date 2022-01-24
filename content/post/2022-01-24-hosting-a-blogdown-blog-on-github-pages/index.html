@@ -1,0 +1,26 @@
+---
+title: Hosting a blogdown blog on github pages
+author: 'Alexander Fischer'
+date: '2022-01-24'
+slug: []
+categories: [blogdown, github pages]
+tags: [blogdown, github pages]
+description: Description for the page
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I have recently moved from building this blog via the <a href="">distill</a> package to <a href="">blogdown</a>. The main reason for this is that, at the time of writing, distill does not support <a href="https://github.com/rstudio/distill/issues/33">full RSS feeds for multiple articles</a>. Deploying the <code>distill</code> based blog via github pages was quite straightforward, but doing so for the <code>blogdown</code> based blog proved to be quite cumbersome.</p>
+<p>While there are many good blog posts on deploying blogdown-blogs on github pages, many users tend to run into problems, as this <a href="https://stackoverflow.com/questions/45362628/github-pages-site-not-detecting-index-html">stackoverflow thread</a> with 100+ upvotes shows.</p>
+<p>In my case, I needed to do two things for successful deployment of this blog on github pages:</p>
+<ol style="list-style-type: decimal">
+<li>add a <code>.nojekyll</code> file to the main directory of the blog</li>
+<li>add a <code>publishDir: docs</code> statement below <code>baseurl</code> in the <code>config.yaml</code> file. Rebuilding via <code>blogdown::build_site()</code> then creates a docs folder and populates it with html. On github pages, I then needed to make sure that the blog is build based on this docs folder (see the image below). After that, I simply had to commit, push, and github actions would finally deploy the blog without any error messages!</li>
+</ol>
+<div class="figure" style="text-align: center"><span id="fig:pressure"></span>
+<img src="github_pages.PNG" alt="Build the github pages site from the 'docs' folder" width="75%" />
+<p class="caption">
+Figure 1: Build the github pages site from the ‘docs’ folder
+</p>
+</div>

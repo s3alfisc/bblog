@@ -70,7 +70,7 @@ bench::mark(
 
 `vcovBS()` finishes in around `r round(as.numeric(bench1$median), 0)` seconds - that's not too bad, isn't it?
 
-```{r}
+```{r, warning = FALSE}
 # wild cluster bootstrap via fwildclusterboot::boottest()
 bench1f <- 
 bench::mark(boot_fast =
@@ -113,7 +113,7 @@ Between the two implementations, the bootstrapped t-statistics, p-values and con
 
 The speed gains of `fwildclusterboot` scale well in the number of bootstrap iterations. For $B = 99.999$ iterations, it finishes in around one second. For `vcovBS`, you can expect a linear increase in run-time in the number of bootstrap iterations: a ten-fold increase in bootstrap iterations will increase run-time to around 360 seconds.
 
-```{r}
+```{r, warning = FALSE}
 B <- 99999
 
 bench2f <- 
@@ -133,7 +133,7 @@ bench2f
 
 What happens if we increase the sample size to $N = 100.000$?
 
-```{r}
+```{r, warning = FALSE}
 N <- 100000
 data <- fwildclusterboot:::create_data(N = N,
                                          N_G1 = 50, icc1 = 0.1,
@@ -156,7 +156,7 @@ bench3
 
 More than `r floor(as.numeric(bench3$median) / 60)` minutes pass before `vcovBS()` finishes. How does `boottest()` do in comparison?
 
-```{r}
+```{r, warning = FALSE}
 # wild cluster bootstrap via fwildclusterboot::boottest()
 
 bench3f <- 

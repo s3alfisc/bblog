@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github pages on Wild Econometrics &amp; R</title>
+    <link>https://s3alfisc.github.io/blog/tags/github-pages/</link>
+    <description>Recent content in github pages on Wild Econometrics &amp; R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 24 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hosting a blogdown blog on github pages</title>
+      <link>https://s3alfisc.github.io/blog/post/2022-01-24-hosting-a-blogdown-blog-on-github-pages/</link>
+      <pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/post/2022-01-24-hosting-a-blogdown-blog-on-github-pages/</guid>
+      <description>I have recently moved from building this blog via the distill package to blogdown. The main reason for this is that, at the time of writing, distill does not support full RSS feeds for multiple articles. Deploying the distill based blog via github pages was quite straightforward, but doing so for the blogdown based blog proved to be quite cumbersome.
+While there are many good blog posts on deploying blogdown-blogs on github pages, many users tend to run into problems, as this stackoverflow thread with 100+ upvotes shows.</description>
+    </item>
+    
+  </channel>
+</rss>
