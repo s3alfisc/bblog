@@ -42,3 +42,4 @@ menu:
     - name: Subscribe
       url: /index.xml
       weight: 5
+output_dir: "docs"
