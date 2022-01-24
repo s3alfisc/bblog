@@ -3,107 +3,107 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/ci/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/ci/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/ci/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/ci/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/github-actions/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/github-actions/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/github-actions/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/github-actions/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/julia/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/julia/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/julia/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/julia/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/post/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/post/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/r/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/r/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/r/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/r/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/post/testing-an-r-package-against-a-julia-package-via-github-actions/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/post/testing-an-r-package-against-a-julia-package-via-github-actions/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/</loc>
     <lastmod>2021-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/econometrics/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/econometrics/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/econometrics/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/econometrics/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/statistical-inference/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/statistical-inference/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/statistical-inference/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/statistical-inference/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/tags/wild-cluster-bootstrap/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/tags/wild-cluster-bootstrap/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/categories/wild-cluster-bootstrap/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/categories/wild-cluster-bootstrap/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://s3alfisc.netlify.com/about/</loc>
+    <loc>https://s3alfisc.github.io/blog/%20publishDir/about/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url>
   
