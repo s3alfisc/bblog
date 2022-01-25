@@ -158,7 +158,7 @@ jobs:
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The unit tests for fwildclusterboot currently run for about 30 minutes.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;I have not implemented test that compare &lt;code&gt;fwildclusterboot&lt;/code&gt; against other R implementations of the wild bootstrap, mainly due to performance reasons. As resampling methods are usually time intensive and fwildclusterboot is &lt;a href=&#34;https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/&#34;&gt;much faster&lt;/a&gt; than other R implementations, running unit tests against other R implementations would simply take a &lt;em&gt;very&lt;/em&gt; long time.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;I have not implemented test that compare &lt;code&gt;fwildclusterboot&lt;/code&gt; against other R implementations of the wild bootstrap, mainly due to performance reasons. As resampling methods are usually time intensive and fwildclusterboot is &lt;a href=&#34;https://s3alfisc.github.io/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/&#34;&gt;much faster&lt;/a&gt; than other R implementations, running unit tests against other R implementations would simply take a &lt;em&gt;very&lt;/em&gt; long time.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>    </item>
