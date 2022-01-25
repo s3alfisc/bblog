@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>statistical inference on Wild Econometrics &amp; R</title>
-    <link>https://s3alfisc.github.io/blog/categories/statistical-inference/</link>
-    <description>Recent content in statistical inference on Wild Econometrics &amp; R</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title></title>    <link>https://s3alfisc.github.io/blog/categories/statistical-inference/</link>
+    <description>Recent blog posts by </description>    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/categories/statistical-inference/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,8 +11,165 @@
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/</guid>
-      <description>When you suspect that the error terms in your regression model are correlated within clusters, and the number of clusters is small, trouble might be running at you. In such a situation, common cluster robust standard errors tend to be downward biased - they are too eager to reject the null hypothesis. Since Cameron, Gelbach &amp;amp; Miller first suggested that the wild cluster bootstrap might be preferable to sandwich standard errors when the number of clusters is small, it has become common practice among empirical economists to check their cluster robust inferences against the wild cluster bootstrap.</description>
-    </item>
+   <description>
+&lt;script src=&#34;https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;When you suspect that the error terms in your regression model are correlated within clusters, and the number of clusters is small, trouble might be running at you. In such a situation, common cluster robust standard errors tend to be downward biased - they are too eager to reject the null hypothesis. Since &lt;a href=&#34;https://www.jstor.org/stable/40043157&#34;&gt;Cameron, Gelbach &amp;amp; Miller&lt;/a&gt; first suggested that the wild cluster bootstrap might be preferable to sandwich standard errors when the number of clusters is small, it has become common practice among empirical economists to check their cluster robust inferences against the wild cluster bootstrap.&lt;/p&gt;
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:pressure&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;duerer_lion.jpg&#34; alt=&#34;Not a wild bootstrap, but a wild lion, by Albrecht Duerer&#34; width=&#34;75%&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Not a wild bootstrap, but a wild lion, by Albrecht Duerer
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;At some point, I found myself in a “small number of clusters” situation. I was trying to estimate a treatment effect for a sample of a few thousand observations, which were grouped into around 20 clusters. So I started to search for R packages that implement the wild cluster bootstrap, and found two implementations on CRAN: &lt;code&gt;sandwich&lt;/code&gt; and &lt;code&gt;clusterSEs&lt;/code&gt;. I opted for the &lt;code&gt;sandwich&lt;/code&gt; package (because it’s actually a really great package) and fit my regression model via &lt;code&gt;lm()&lt;/code&gt;. Then I started to bootstrap with sandwich’s &lt;code&gt;vcovBS()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;So the bootstrap ran … and I waited. Eventually, I left my office to get some coffee with a colleague, returned to my desk … and the bootstrap still ran, and I waited even longer.&lt;/p&gt;
+&lt;p&gt;But while the bootstrap was running, I scrolled the web and stumbled over the &lt;a href=&#34;https://journals.sagepub.com/doi/abs/10.1177/1536867X19830877?journalCode=stja&#34;&gt;“Fast &amp;amp; Wild” paper&lt;/a&gt; by Roodman et al (2019). The claimed performance in the paper seemed to good to be true: bootstrap inference with several thousands of iterations, in a fraction of a second? The paper presents a Stata implementation of the fast algorithm, &lt;a href=&#34;https://github.com/droodman/bottest&#34;&gt;boottest&lt;/a&gt;, and that was a good enough reason for me to start up a Stata session to try it out.&lt;/p&gt;
+&lt;p&gt;And indeed, &lt;code&gt;boottest&lt;/code&gt; &lt;em&gt;is&lt;/em&gt; mind-blowingly fast: the bootstrap finished almost instantaneously. I was hooked: how was it possible that &lt;code&gt;boottest&lt;/code&gt; was &lt;em&gt;so damn fast&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;Luckily, the “Fast &amp;amp; Wild” paper explains the algorithm powering &lt;code&gt;boottest&lt;/code&gt; in great detail. Out of curiosity, I started to implement it in R, and the &lt;code&gt;fwildclusterboot&lt;/code&gt; package is the result of this effort. Now, was it worth all the work? How much faster is the “fast algorithm” implemented in &lt;code&gt;fwildclusterboot&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;To compare &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; performance to &lt;code&gt;sandwich&lt;/code&gt;, I simulate a data set with &lt;span class=&#34;math inline&#34;&gt;\(N = 10.000\)&lt;/span&gt; observations and &lt;span class=&#34;math inline&#34;&gt;\(N_G = 42\)&lt;/span&gt; distinct clusters (42 is the magic number of clusters for which the economics profession has decided that large N asymptotics fail, see Angrist &amp;amp; Pischke’s “Mostly Harmless”, Chapter 8.2.3) and fit a regression model via &lt;code&gt;lm()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(fwildclusterboot)
+library(sandwich)
+library(lmtest)
+library(bench)
+
+# simulate data
+seed &amp;lt;- 236723478
+N &amp;lt;- 10000
+data &amp;lt;- fwildclusterboot:::create_data(N = N,
+                                         N_G1 = 42, icc1 = 0.1,
+                                         N_G2 = 20, icc2 = 0.8,
+                                         numb_fe1 = 10,
+                                         numb_fe2 = 10,
+                                         seed = seed,
+                                         weights = 1:N)
+lm_fit &amp;lt;- lm(proposition_vote ~ treatment + as.factor(Q1_immigration) + as.factor(Q2_defense), data)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the first experiment, the bootstrap will run for &lt;span class=&#34;math inline&#34;&gt;\(B = 9999\)&lt;/span&gt; iterations. For the estimation via &lt;code&gt;vcovBS&lt;/code&gt;, we will use 4 cores.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;B &amp;lt;- 9999
+# wild cluster bootstrap via sandwich::vcovBS
+
+bench1 &amp;lt;- 
+bench::mark(
+  boot_slow = sandwich::vcovBS(lm_fit,
+                                R = B,
+                                cluster = ~ group_id1,
+                                cores = 4), 
+  iterations = 1
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;vcovBS()&lt;/code&gt; finishes in around 45 seconds - that’s not too bad, isn’t it?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# wild cluster bootstrap via fwildclusterboot::boottest()
+bench1f &amp;lt;- 
+bench::mark(boot_fast =
+                   fwildclusterboot::boottest(lm_fit,
+                                              clustid = c(&amp;quot;group_id1&amp;quot;),
+                                              B = B,
+                                              param = &amp;quot;treatment&amp;quot;,
+                                              seed = 3,
+                                              nthreads = 1), 
+            iterations = 25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Some expressions had a GC in every iteration; so filtering is disabled.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench1f&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &amp;lt;bch:expr&amp;gt; &amp;lt;bch:tm&amp;gt; &amp;lt;bch:tm&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
+## 1 boot_fast    74.7ms    116ms      7.38      99MB     25.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While &lt;code&gt;sandwich::vcovBS()&lt;/code&gt; takes almost 44.73 seconds, &lt;code&gt;fwildclusterboot::boottest()&lt;/code&gt; runs in around one fifth of a second 🚀. Yes, really: one fifth of a second! That’s a speed gain of a factor of 386! If you don’t have 4 cores available, performance differences get even more extreme (e.g. if you only have one core, you have to multiply 45 with a number slightly smaller than 4).&lt;/p&gt;
+&lt;p&gt;How do &lt;code&gt;vcovBS()&#39;s&lt;/code&gt; and &lt;code&gt;boottest()&#39;s&lt;/code&gt; results compare?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(boot_fast)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## boottest.lm(object = lm_fit, clustid = c(&amp;quot;group_id1&amp;quot;), param = &amp;quot;treatment&amp;quot;, 
+##     B = B, seed = 3, nthreads = 1)
+##  
+##  Hypothesis: 1*treatment = 0
+##  Observations: 10000
+##  Bootstr. Iter: 9999
+##  Bootstr. Type: rademacher
+##  Clustering: 1-way
+##  Confidence Sets: 95%
+##  Number of Clusters: 42
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              term estimate statistic p.value conf.low conf.high
+## 1 1*treatment = 0    0.002     0.516   0.605   -0.007     0.012&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmtest::coeftest(x = lm_fit, vcov = boot_slow)[2,]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Estimate  Std. Error     t value    Pr(&amp;gt;|t|) 
+## 0.002387792 0.004617364 0.517133165 0.605074664&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmtest::coefci(x = lm_fit, vcov = boot_slow)[2,]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        2.5 %       97.5 % 
+## -0.006663173  0.011438758&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Between the two implementations, the bootstrapped t-statistics, p-values and confidence intervals are almost identical. They are not exactly identical for two reasons: first due to sampling uncertainty in the bootstrap, and second because &lt;code&gt;vcovBS&lt;/code&gt; does not apply any small sample adjustments (at least I could not find anything related to small-sample adjustments in both documentation and source code).&lt;/p&gt;
+&lt;p&gt;The speed gains of &lt;code&gt;fwildclusterboot&lt;/code&gt; scale well in the number of bootstrap iterations. For &lt;span class=&#34;math inline&#34;&gt;\(B = 99.999\)&lt;/span&gt; iterations, it finishes in around one second. For &lt;code&gt;vcovBS&lt;/code&gt;, you can expect a linear increase in run-time in the number of bootstrap iterations: a ten-fold increase in bootstrap iterations will increase run-time to around 360 seconds.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;B &amp;lt;- 99999
+
+bench2f &amp;lt;- 
+bench::mark(
+  boot_fast =
+    fwildclusterboot::boottest(lm_fit,
+                             clustid = c(&amp;quot;group_id1&amp;quot;),
+                             B = B,
+                             param = &amp;quot;treatment&amp;quot;,
+                             seed = 3,
+                             nthreads = 1), 
+  iterations = 10
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Some expressions had a GC in every iteration; so filtering is disabled.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench2f&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &amp;lt;bch:expr&amp;gt; &amp;lt;bch:tm&amp;gt; &amp;lt;bch:tm&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
+## 1 boot_fast     531ms    544ms      1.79     727MB     15.5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What happens if we increase the sample size to &lt;span class=&#34;math inline&#34;&gt;\(N = 100.000\)&lt;/span&gt;?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;N &amp;lt;- 100000
+data &amp;lt;- fwildclusterboot:::create_data(N = N,
+                                         N_G1 = 50, icc1 = 0.1,
+                                         N_G2 = 20, icc2 = 0.8,
+                                         numb_fe1 = 10,
+                                         numb_fe2 = 10,
+                                         seed = seed,
+                                         weights = 1:N)
+lm_fit &amp;lt;- lm(proposition_vote ~ treatment + as.factor(Q1_immigration) + as.factor(Q2_defense), data)
+B &amp;lt;- 9999
+# wild cluster bootstrap via sandwich::vcovBS
+bench3 &amp;lt;- bench::mark(
+  boot_slow = sandwich::vcovBS(lm_fit,
+                                R = B,
+                                cluster = ~ group_id1,
+                                cores = 4), 
+  iterations = 1)
+bench3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &amp;lt;bch:expr&amp;gt; &amp;lt;bch:tm&amp;gt; &amp;lt;bch:tm&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
+## 1 boot_slow        8m       8m   0.00208    31.2MB        0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More than 8 minutes pass before &lt;code&gt;vcovBS()&lt;/code&gt; finishes. How does &lt;code&gt;boottest()&lt;/code&gt; do in comparison?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# wild cluster bootstrap via fwildclusterboot::boottest()
+
+bench3f &amp;lt;- 
+bench::mark(
+  boot_fast =
+    fwildclusterboot::boottest(lm_fit,
+                             clustid = c(&amp;quot;group_id1&amp;quot;),
+                             B = B,
+                             param = &amp;quot;treatment&amp;quot;,
+                             seed = 3,
+                             nthreads = 1), 
+iterations = 5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Some expressions had a GC in every iteration; so filtering is disabled.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench3f&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &amp;lt;bch:expr&amp;gt; &amp;lt;bch:tm&amp;gt; &amp;lt;bch:tm&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
+## 1 boot_fast     311ms    336ms      2.66     308MB     10.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With &lt;code&gt;B = 9999&lt;/code&gt; iterations, &lt;code&gt;boottest()&lt;/code&gt; runs for around 0.34 seconds, while &lt;code&gt;vcovBS()&lt;/code&gt; only finishes after 480 seconds. &lt;code&gt;fwildclusterboot::boottest()&lt;/code&gt; is 1427 times faster than &lt;code&gt;sandwich::vcovBS&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;As a conclusion: if you face a “small number of clusters” problem and want to reduce your daily ☕ consumption, you should consider using &lt;a href=&#34;https://github.com/s3alfisc/fwildclusterboot&#34;&gt;fwildclusterboot&lt;/a&gt;, Stata’s &lt;a href=&#34;https://github.com/droodman/boottest&#34;&gt;boottest&lt;/a&gt;, or &lt;a href=&#34;https://github.com/droodman/WildBootTests.jl&#34;&gt;WildBootTests.jl&lt;/a&gt;, which is a novel Julia implementation of the “fast algorithm”. If all of this seems like black magic to you and you want to learn more about the “fast algorithm”, I cannot recommend the “Fast &amp;amp; Wild” paper highly enough.&lt;/p&gt;
+&lt;div id=&#34;literature&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Literature&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;“Fast &amp;amp; Wild”, Roodman et al. (2019), The Stata Journal&lt;/li&gt;
+&lt;li&gt;“Bootstrap-Based Improvements for Inference with Clustered Errors”, Cameron, Gelbach &amp;amp; Miller (2008), The Review of Economics and Statistics&lt;/li&gt;
+&lt;li&gt;“Cluster-robust inference: A guide to empirical practice” (2020), MacKinnon, Oerregaard Nielsen &amp;amp; Webb, Working Paper&lt;/li&gt;
+&lt;li&gt;“Mostly Harmless Econometrics”, Angrist &amp;amp; Pischke (2009), Princeton University Press&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>    </item>
     
   </channel>
 </rss>

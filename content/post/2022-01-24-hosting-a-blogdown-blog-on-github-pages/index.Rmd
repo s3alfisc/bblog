@@ -6,7 +6,7 @@ categories: [blogdown, github pages, R]
 tags: [blogdown, github pages, R]
 ---
 
-I have recently moved from building this blog via the [distill](https://github.com/rstudio/distill) package to [blogdown](https://github.com/rstudio/blogdown). The main reason for this is that, at the time of writing, distill does not support [full RSS feeds for multiple articles](https://github.com/rstudio/distill/issues/33), which is a requirement for linking my blog to [R-bloggers](r-bloggers.com). Deploying the `distill` based blog via github pages was quite straightforward, but doing so for the `blogdown` based blog proved to be slightly more cumbersome. 
+I have recently moved from building this blog via the [distill](https://github.com/rstudio/distill) package to [blogdown](https://github.com/rstudio/blogdown). The main reason for this is that at the time of writing, distill does not support [full RSS feeds for multiple articles](https://github.com/rstudio/distill/issues/33), which is a requirement for linking my blog to [R-bloggers](r-bloggers.com). Deploying the `distill` based blog via github pages was quite straightforward, but doing so for the `blogdown` based blog proved to be slightly more cumbersome. 
 
 While there are many good blog posts on deploying blogdown-blogs on github pages (e.g. [here](https://www.r-bloggers.com/2019/09/start-blogging-in-5-minutes-on-netlify-with-hugo-and-blogdown-september-2019-update/) or [here](https://www.caitlincasar.com/post/blogdown/)), I appear not to be the only one who ran into problems, as this [stackoverflow thread](https://stackoverflow.com/questions/45362628/github-pages-site-not-detecting-index-html) with 100+ upvotes shows. 
 

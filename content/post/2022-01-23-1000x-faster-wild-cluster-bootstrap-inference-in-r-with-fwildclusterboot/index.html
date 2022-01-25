@@ -52,7 +52,7 @@ bench::mark(
                                 cores = 4), 
   iterations = 1
 )</code></pre>
-<p><code>vcovBS()</code> finishes in around 45 seconds - that’s not too bad, isn’t it?</p>
+<p><code>vcovBS()</code> finishes in around 30 seconds - that’s not too bad, isn’t it?</p>
 <pre class="r"><code># wild cluster bootstrap via fwildclusterboot::boottest()
 bench1f &lt;- 
 bench::mark(boot_fast =
@@ -62,14 +62,13 @@ bench::mark(boot_fast =
                                               param = &quot;treatment&quot;,
                                               seed = 3,
                                               nthreads = 1), 
-            iterations = 25)</code></pre>
-<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre class="r"><code>bench1f</code></pre>
+            iterations = 25)
+bench1f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast    74.7ms    116ms      7.38      99MB     25.1</code></pre>
-<p>While <code>sandwich::vcovBS()</code> takes almost 44.73 seconds, <code>fwildclusterboot::boottest()</code> runs in around one fifth of a second 🚀. Yes, really: one fifth of a second! That’s a speed gain of a factor of 386! If you don’t have 4 cores available, performance differences get even more extreme (e.g. if you only have one core, you have to multiply 45 with a number slightly smaller than 4).</p>
+## 1 boot_fast    75.1ms   84.7ms      8.72      99MB     29.7</code></pre>
+<p>While <code>sandwich::vcovBS()</code> takes almost 30.42 seconds, <code>fwildclusterboot::boottest()</code> runs in around one fifth of a second 🚀. Yes, really: one fifth of a second! That’s a speed gain of a factor of 359! If you don’t have 4 cores available, performance differences get even more extreme (e.g. if you only have one core, you have to multiply 30 with a number slightly smaller than 4).</p>
 <p>How do <code>vcovBS()'s</code> and <code>boottest()'s</code> results compare?</p>
 <pre class="r"><code>summary(boot_fast)</code></pre>
 <pre><code>## boottest.lm(object = lm_fit, clustid = c(&quot;group_id1&quot;), param = &quot;treatment&quot;, 
@@ -87,10 +86,10 @@ bench::mark(boot_fast =
 ## 1 1*treatment = 0    0.002     0.516   0.605   -0.007     0.012</code></pre>
 <pre class="r"><code>lmtest::coeftest(x = lm_fit, vcov = boot_slow)[2,]</code></pre>
 <pre><code>##    Estimate  Std. Error     t value    Pr(&gt;|t|) 
-## 0.002387792 0.004617364 0.517133165 0.605074664</code></pre>
+## 0.002387792 0.004592932 0.519884080 0.603155903</code></pre>
 <pre class="r"><code>lmtest::coefci(x = lm_fit, vcov = boot_slow)[2,]</code></pre>
 <pre><code>##        2.5 %       97.5 % 
-## -0.006663173  0.011438758</code></pre>
+## -0.006615281  0.011390866</code></pre>
 <p>Between the two implementations, the bootstrapped t-statistics, p-values and confidence intervals are almost identical. They are not exactly identical for two reasons: first due to sampling uncertainty in the bootstrap, and second because <code>vcovBS</code> does not apply any small sample adjustments (at least I could not find anything related to small-sample adjustments in both documentation and source code).</p>
 <p>The speed gains of <code>fwildclusterboot</code> scale well in the number of bootstrap iterations. For <span class="math inline">\(B = 99.999\)</span> iterations, it finishes in around one second. For <code>vcovBS</code>, you can expect a linear increase in run-time in the number of bootstrap iterations: a ten-fold increase in bootstrap iterations will increase run-time to around 360 seconds.</p>
 <pre class="r"><code>B &lt;- 99999
@@ -105,13 +104,13 @@ bench::mark(
                              seed = 3,
                              nthreads = 1), 
   iterations = 10
-)</code></pre>
-<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre class="r"><code>bench2f</code></pre>
+)
+
+bench2f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast     531ms    544ms      1.79     727MB     15.5</code></pre>
+## 1 boot_fast     541ms    553ms      1.77     727MB     15.4</code></pre>
 <p>What happens if we increase the sample size to <span class="math inline">\(N = 100.000\)</span>?</p>
 <pre class="r"><code>N &lt;- 100000
 data &lt;- fwildclusterboot:::create_data(N = N,
@@ -134,8 +133,8 @@ bench3</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_slow        8m       8m   0.00208    31.2MB        0</code></pre>
-<p>More than 8 minutes pass before <code>vcovBS()</code> finishes. How does <code>boottest()</code> do in comparison?</p>
+## 1 boot_slow     7.87m    7.87m   0.00212    31.2MB        0</code></pre>
+<p>More than 7 minutes pass before <code>vcovBS()</code> finishes. How does <code>boottest()</code> do in comparison?</p>
 <pre class="r"><code># wild cluster bootstrap via fwildclusterboot::boottest()
 
 bench3f &lt;- 
@@ -147,14 +146,13 @@ bench::mark(
                              param = &quot;treatment&quot;,
                              seed = 3,
                              nthreads = 1), 
-iterations = 5)</code></pre>
-<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre class="r"><code>bench3f</code></pre>
+iterations = 5)
+bench3f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast     311ms    336ms      2.66     308MB     10.1</code></pre>
-<p>With <code>B = 9999</code> iterations, <code>boottest()</code> runs for around 0.34 seconds, while <code>vcovBS()</code> only finishes after 480 seconds. <code>fwildclusterboot::boottest()</code> is 1427 times faster than <code>sandwich::vcovBS</code>!</p>
+## 1 boot_fast     331ms    352ms      2.57     308MB     9.78</code></pre>
+<p>With <code>B = 9999</code> iterations, <code>boottest()</code> runs for around 0.35 seconds, while <code>vcovBS()</code> only finishes after 472.16 seconds. <code>fwildclusterboot::boottest()</code> is 1340 times faster than <code>sandwich::vcovBS</code>!</p>
 <p>As a conclusion: if you face a “small number of clusters” problem and want to reduce your daily ☕ consumption, you should consider using <a href="https://github.com/s3alfisc/fwildclusterboot">fwildclusterboot</a>, Stata’s <a href="https://github.com/droodman/boottest">boottest</a>, or <a href="https://github.com/droodman/WildBootTests.jl">WildBootTests.jl</a>, which is a novel Julia implementation of the “fast algorithm”. If all of this seems like black magic to you and you want to learn more about the “fast algorithm”, I cannot recommend the “Fast &amp; Wild” paper highly enough.</p>
 <div id="literature" class="section level2">
 <h2>Literature</h2>
