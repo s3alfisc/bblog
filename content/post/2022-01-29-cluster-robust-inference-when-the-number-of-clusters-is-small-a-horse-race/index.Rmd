@@ -127,7 +127,7 @@ Once again, there is no visible difference in performance between bias-corrected
 
 ## Conclusion
 
-So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem? The honest answer is that I still don't know. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap. 
+So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem or data with wildly different cluster sizes? The honest answer is that I still don't know. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap. 
 
 Overall, I am quite impressed by the performance of the Satterthwaite corrected cluster robust sandwich estimator! 
 
