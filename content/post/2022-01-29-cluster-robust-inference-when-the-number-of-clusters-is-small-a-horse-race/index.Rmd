@@ -123,7 +123,7 @@ treatment_effect_sim(n = 2000, n_sims = 1000, workers = 4)
 knitr::include_graphics("treatment_simulations.png")
 ```
 
-Once again, there is no visible difference in performance between debiased standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.
+Once again, there is no visible difference in performance between bias-corrected standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.
 
 ## Conclusion
 
