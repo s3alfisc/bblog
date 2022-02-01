@@ -114,7 +114,7 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 &lt;/div&gt;
 &lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Code&lt;/h2&gt;
-&lt;p&gt;You can find all code to reproduce the analyses above in this &lt;a href=&#34;&#34;&gt;github repo&lt;/a&gt;. It’s essentially a clone of code written by Gord Burtch - my estimate for a lower bound of the share of Gordon’s code is 80%. You can find his code &lt;a href=&#34;https://github.com/gburtch/simulating_cluster_SEs&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find all code to reproduce the analyses above in this &lt;a href=&#34;https://github.com/s3alfisc/clusteredErrorsSims&#34;&gt;github repo&lt;/a&gt;. It’s essentially a clone of code written by Gord Burtch - my estimate for a lower bound of the share of Gordon’s code is 80%. You can find his code &lt;a href=&#34;https://github.com/gburtch/simulating_cluster_SEs&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;literature&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Literature&lt;/h2&gt;

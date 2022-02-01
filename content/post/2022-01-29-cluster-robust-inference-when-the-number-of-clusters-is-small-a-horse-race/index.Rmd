@@ -146,7 +146,7 @@ Overall, I am quite impressed by the performance of the Satterthwaite corrected 
 
 ## Code 
 
-You can find all code to reproduce the analyses above in this [github repo](). It's essentially a clone of code written by Gord Burtch - my estimate for a lower bound of the share of Gordon's code is 80%. You can find his code [here](https://github.com/gburtch/simulating_cluster_SEs).
+You can find all code to reproduce the analyses above in this [github repo](https://github.com/s3alfisc/clusteredErrorsSims). It's essentially a clone of code written by Gord Burtch - my estimate for a lower bound of the share of Gordon's code is 80%. You can find his code [here](https://github.com/gburtch/simulating_cluster_SEs).
 
 ## Literature 
 
