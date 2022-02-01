@@ -8,22 +8,12 @@
   </url>
   
   <url>
-    <loc>https://s3alfisc.github.io/blog/tags/another-tag/</loc>
-    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://s3alfisc.github.io/blog/categories/</loc>
     <lastmod>2022-01-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://s3alfisc.github.io/blog/categories/clustered-errors/</loc>
-    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/tags/one-tag/</loc>
     <lastmod>2022-01-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -39,11 +29,6 @@
   
   <url>
     <loc>https://s3alfisc.github.io/blog/categories/statistical-inference/</loc>
-    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/tags/</loc>
     <lastmod>2022-01-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -79,6 +64,11 @@
   
   <url>
     <loc>https://s3alfisc.github.io/blog/post/2022-01-24-hosting-a-blogdown-blog-on-github-pages/</loc>
+    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/tags/</loc>
     <lastmod>2022-01-24T00:00:00+00:00</lastmod>
   </url>
   

@@ -4,10 +4,6 @@ author: 'Alexander Fischer'
 date: '2022-01-29'
 slug: []
 categories: [statistical inference, wild cluster bootstrap, clustered errors, Satterthwaite correction]
-tags:
-  - one tag
-  - another tag
-description: Description for the page
 ---
 
 ```{r setup, include=FALSE}
@@ -63,8 +59,6 @@ $$
 
 where $E(\epsilon_{ig}|X_{ig}) = 0$, $\beta_0 = 1$, $\beta_1 = 0.5$ and the errors $\epsilon_{ig}$ are simulated to be correlated within $G$ clusters with intra-cluster correlation $\rho$. All errors are uncorrelated across clusters.  
 
-Throughout all simulations, the wild cluster bootstrap will run with $B = 9999$ bootstrap iterations. 
-
 So the stage is set for a `r emo::ji("horse")` race! My champion, of course, is the wild cluster bootstrap, but let's see how the bias-corrected standard errors perform in comparison! 
 
 ```{r pressure, echo=FALSE, fig.cap="Toulose-Lautrec, Le Jockey, 1899", out.width = '75%', align="center"}
@@ -73,7 +67,8 @@ knitr::include_graphics("Le_jockey.jpg")
 
 #### Simulation 1: Small number of clusters G & balanced cluster sizes
 
-To initiate the horse race, you simply have to run the `sim_balanced_clusters()` function, though I want to note that on my laptop, this takes around 2h while using multiple cores. 
+To initiate the horse race, you simply have to run the `sim_balanced_clusters()` function, though I want to note that on my laptop, this takes around 2h while using multiple cores. By default, the wild cluster bootstrap will run with $B = 9999$ bootstrap iterations throughout all simulations.
+
 
 ```{r, eval = FALSE}
 library(clusteredErrorsSims)
@@ -91,13 +86,13 @@ There are three takeaways from figure 2:
 
 + As expected, inference with non-robust standard errors is severely biased. 
 + Inference via cluster robust estimators tends to under-reject for less than 50 clusters. 
-+ The wild cluster bootstrap **and** cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of $ 3 \leq G \leq 10$, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly under-rejects. 
++ The wild cluster bootstrap **and** cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of $3 \leq G \leq 10$, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly under-rejects. 
 
 #### Simulation 2: Wildly different cluster sizes
 
 Instead of simulating balanced cluster sizes, I now follow [MacKinnon & Webb](https://ageconsearch.umn.edu/record/274639/files/qed_wp_1314.pdf) and simulate group sizes that mimic the relative size of the US states (minus Washington DC) for $G=50$ and $G = 100$ clusters. The dgp is unchanged, but in parallel to MacKinnon & Webb's work, I set the number of observations $N$ to $2.000$. I also increase the number of Monte Carlo simulations to `n_sim = 5.000` and repeat the analysis for a range of intra-cluster correlations $\rho$.
 
-```{r Figure 2, echo=FALSE, fig.cap="Simulation results. N = 2000, 50 and 100 clusters, wildly different cluster sizes", out.width = '75%', fig.align="center" }
+```{r Figure3, echo=FALSE, fig.cap="Simulation results. N = 2000, 50 and 100 clusters, wildly different cluster sizes", out.width = '75%', fig.align="center" }
 knitr::include_graphics("wildly_different.png")
 ```
 
@@ -119,7 +114,7 @@ The last simulation investigates a topic that has received considerable attentio
 treatment_effect_sim(n = 2000, n_sims = 1000, workers = 4)
 ```
 
-```{r Figure_four, echo=FALSE, fig.cap="Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.", out.width = '75%', fig.align="center" }
+```{r Figure4, echo=FALSE, fig.cap="Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.", out.width = '75%', fig.align="center" }
 knitr::include_graphics("treatment_simulations.png")
 ```
 
