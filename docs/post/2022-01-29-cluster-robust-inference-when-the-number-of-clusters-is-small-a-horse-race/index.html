@@ -175,7 +175,7 @@ Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cl
 </div>
 <div id="treatment-effects" class="section level4">
 <h4>Treatment Effects</h4>
-<p>The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. <a href="https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;login=false">“How much should we trust DiD estimates?</a>“)? For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing <span class="math inline">\(X_{ig}\)</span> in the model above by a treatment assignment dummy <span class="math inline">\(D_{ig}\)</span>. (Loosely) following MacKinnon &amp; Webb once again, I then simulate <span class="math inline">\(N=2000\)</span> observations with intra-cluster correlation <span class="math inline">\(\rho = 0.5\)</span> and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters <span class="math inline">\(P \in \{1/50, ..., 1\}\)</span>, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order .</p>
+<p>The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. <a href="https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;login=false">“How much should we trust DiD estimates?</a>“)? For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing <span class="math inline">\(X_{ig}\)</span> in the model above by a treatment assignment dummy <span class="math inline">\(D_{ig}\)</span>. (Loosely) following MacKinnon &amp; Webb once again, I then simulate <span class="math inline">\(N=2000\)</span> observations with intra-cluster correlation <span class="math inline">\(\rho = 0.5\)</span> and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters <span class="math inline">\(P \in \{1/50, ..., 1\}\)</span>, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.</p>
 <pre class="r"><code>treatment_effect_sim(n = 2000, n_sims = 1000, workers = 4)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:Figure4"></span>
 <img src="treatment_simulations.png" alt="Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size." width="75%" />
@@ -183,12 +183,12 @@ Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cl
 Figure 4: Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.
 </p>
 </div>
-<p>Once again, there is no visible difference in performance between bias-corrected standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.</p>
+<p>Once again, there is no visible difference in performance between bias-corrected standard errors and the wild cluster bootstrap, but the CRVE tends to underreject in all three scenarios.</p>
 </div>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
-<p>So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem or data with wildly different cluster sizes? The honest answer is that I still don’t know. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap.</p>
+<p>So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem or data with wildly different cluster sizes? The honest answer is that I still don’t know <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap.</p>
 <p>Overall, I am quite impressed by the performance of the Satterthwaite corrected cluster robust sandwich estimator!</p>
 <!-- ### When the parameter of interest is a treatment effect  -->
 <!-- In a final simulation, I investigate the (probably) most popular regression specification in all of economics: the regression specification of a Difference-in-Differences strategy - a two-way fixed effects model with a binary variable $D$, a treatment effect.   -->
@@ -212,6 +212,12 @@ Figure 4: Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects
 <li><a href="https://arxiv.org/pdf/1601.01981.pdf">Pustejovsky &amp; Tipton - “Small-sample methods for cluster-robust variance estimation and hypothesis testing in fixed effects models”, Journal of Economics and Business Statistics (2018)</a></li>
 <li><a href="https://www.econstor.eu/bitstream/10419/97480/1/757403891.pdf">Webb - “Reworking wild bootstrap based inference for clustered errors”, Working Paper (2013)</a></li>
 </ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Note that MacKinnon and Webb conduct Monte Carlo studies on the WCB with several 100K iterations, so it might be necessary to increase the number of iterations to make more definite statements.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 

@@ -88,7 +88,7 @@ Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cl
 &lt;/div&gt;
 &lt;div id=&#34;treatment-effects&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Treatment Effects&lt;/h4&gt;
-&lt;p&gt;The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. &lt;a href=&#34;https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;amp;login=false&#34;&gt;“How much should we trust DiD estimates?&lt;/a&gt;“)? For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing &lt;span class=&#34;math inline&#34;&gt;\(X_{ig}\)&lt;/span&gt; in the model above by a treatment assignment dummy &lt;span class=&#34;math inline&#34;&gt;\(D_{ig}\)&lt;/span&gt;. (Loosely) following MacKinnon &amp;amp; Webb once again, I then simulate &lt;span class=&#34;math inline&#34;&gt;\(N=2000\)&lt;/span&gt; observations with intra-cluster correlation &lt;span class=&#34;math inline&#34;&gt;\(\rho = 0.5\)&lt;/span&gt; and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters &lt;span class=&#34;math inline&#34;&gt;\(P \in \{1/50, ..., 1\}\)&lt;/span&gt;, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order .&lt;/p&gt;
+&lt;p&gt;The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. &lt;a href=&#34;https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;amp;login=false&#34;&gt;“How much should we trust DiD estimates?&lt;/a&gt;“)? For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing &lt;span class=&#34;math inline&#34;&gt;\(X_{ig}\)&lt;/span&gt; in the model above by a treatment assignment dummy &lt;span class=&#34;math inline&#34;&gt;\(D_{ig}\)&lt;/span&gt;. (Loosely) following MacKinnon &amp;amp; Webb once again, I then simulate &lt;span class=&#34;math inline&#34;&gt;\(N=2000\)&lt;/span&gt; observations with intra-cluster correlation &lt;span class=&#34;math inline&#34;&gt;\(\rho = 0.5\)&lt;/span&gt; and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters &lt;span class=&#34;math inline&#34;&gt;\(P \in \{1/50, ..., 1\}\)&lt;/span&gt;, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;treatment_effect_sim(n = 2000, n_sims = 1000, workers = 4)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:Figure4&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;treatment_simulations.png&#34; alt=&#34;Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.&#34; width=&#34;75%&#34; /&gt;
@@ -96,12 +96,12 @@ Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cl
 Figure 4: Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;Once again, there is no visible difference in performance between bias-corrected standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.&lt;/p&gt;
+&lt;p&gt;Once again, there is no visible difference in performance between bias-corrected standard errors and the wild cluster bootstrap, but the CRVE tends to underreject in all three scenarios.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem or data with wildly different cluster sizes? The honest answer is that I still don’t know. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap.&lt;/p&gt;
+&lt;p&gt;So, when should you use Satterthwaite corrected cluster robust standard errors, and when should you rely on the wild cluster bootstrap in case you are facing a small number of clusters problem or data with wildly different cluster sizes? The honest answer is that I still don’t know &lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. My main learning from the simulations above is that the Satterthwaite correction method might perform just as well as the wild cluster bootstrap.&lt;/p&gt;
 &lt;p&gt;Overall, I am quite impressed by the performance of the Satterthwaite corrected cluster robust sandwich estimator!&lt;/p&gt;
 &lt;!-- ### When the parameter of interest is a treatment effect  --&gt;
 &lt;!-- In a final simulation, I investigate the (probably) most popular regression specification in all of economics: the regression specification of a Difference-in-Differences strategy - a two-way fixed effects model with a binary variable $D$, a treatment effect.   --&gt;
@@ -125,6 +125,12 @@ Figure 4: Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1601.01981.pdf&#34;&gt;Pustejovsky &amp;amp; Tipton - “Small-sample methods for cluster-robust variance estimation and hypothesis testing in fixed effects models”, Journal of Economics and Business Statistics (2018)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.econstor.eu/bitstream/10419/97480/1/757403891.pdf&#34;&gt;Webb - “Reworking wild bootstrap based inference for clustered errors”, Working Paper (2013)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Note that MacKinnon and Webb conduct Monte Carlo studies on the WCB with several 100K iterations, so it might be necessary to increase the number of iterations to make more definite statements.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 </description>    </item>
     
