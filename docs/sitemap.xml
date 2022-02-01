@@ -3,17 +3,72 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://s3alfisc.github.io/blog/post/2022-01-29-cluster-robust-inference-when-the-number-of-clusters-is-small-a-horse-race/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/tags/another-tag/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/categories/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/categories/clustered-errors/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/tags/one-tag/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/post/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/categories/satterthwaite-correction/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/categories/statistical-inference/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/tags/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/</loc>
+    <lastmod>2022-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://s3alfisc.github.io/blog/post/2022-01-27-inverting-p-values-to-obtaina-confidence-interval/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://s3alfisc.github.io/blog/tags/blogdown/</loc>
     <lastmod>2022-01-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://s3alfisc.github.io/blog/categories/blogdown/</loc>
-    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/categories/</loc>
     <lastmod>2022-01-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -29,21 +84,6 @@
   
   <url>
     <loc>https://s3alfisc.github.io/blog/post/2022-01-24-hosting-a-blogdown-blog-on-github-pages/</loc>
-    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/post/</loc>
-    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/tags/</loc>
-    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/</loc>
     <lastmod>2022-01-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -113,17 +153,7 @@
   </url>
   
   <url>
-    <loc>https://s3alfisc.github.io/blog/categories/statistical-inference/</loc>
-    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</loc>
-    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</loc>
     <lastmod>2021-12-12T00:00:00+00:00</lastmod>
   </url>
   

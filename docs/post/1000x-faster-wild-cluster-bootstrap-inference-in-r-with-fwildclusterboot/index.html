@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> 1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot - Wild Econometrics &amp; R </title>
+    <title> 1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot 🚀 - Wild Econometrics &amp; R </title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="referrer" content="no-referrer">
@@ -13,13 +13,13 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/" />
-    <meta property="og:title" content="1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot" />
+    <meta property="og:title" content="1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot 🚀" />
     <meta property="og:image" content="https://s3alfisc.github.io/blog/" />
     <meta property="og:description" content="..." />
 
     <meta name="twitter:card" content="summary_large_image" />
     
-    <meta name="twitter:title" content="1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot" />
+    <meta name="twitter:title" content="1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot 🚀" />
     <meta name="twitter:description" content="..." />
     <meta name="twitter:image" content="https://s3alfisc.github.io/blog/" />
 
@@ -36,7 +36,7 @@
     
 
     <link rel="shortcut icon"
-        href="https://s3alfisc.github.io/blog/images/favicon.png">
+        href="https://s3alfisc.github.io/blog/images/duerer_lion.png">
 
     
     <link href="https://s3alfisc.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Wild Econometrics &amp; R" />
@@ -95,7 +95,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-lg-8">
-                    <h1 class="mx-0 mx-md-4">1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot</h1>
+                    <h1 class="mx-0 mx-md-4">1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot 🚀</h1>
                     <div class="markdown">
                         
     
@@ -103,7 +103,7 @@
 
 
 <p>When you suspect that the error terms in your regression model are correlated within clusters, and the number of clusters is small, trouble might be running at you. In such a situation, common cluster robust standard errors tend to be downward biased - they are too eager to reject the null hypothesis. Since <a href="https://www.jstor.org/stable/40043157">Cameron, Gelbach &amp; Miller</a> first suggested that the wild cluster bootstrap might be preferable to sandwich standard errors when the number of clusters is small, it has become common practice among empirical economists to check their cluster robust inferences against the wild cluster bootstrap.</p>
-<div class="figure" style="text-align: center"><span id="fig:pressure"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pressure"></span>
 <img src="duerer_lion.jpg" alt="Not a wild bootstrap, but a wild lion, by Albrecht Duerer" width="75%" />
 <p class="caption">
 Figure 1: Not a wild bootstrap, but a wild lion, by Albrecht Duerer
@@ -142,8 +142,13 @@ bench::mark(
                                 cluster = ~ group_id1,
                                 cores = 4), 
   iterations = 1
-)</code></pre>
-<p><code>vcovBS()</code> finishes in around 30 seconds - that’s not too bad, isn’t it?</p>
+)
+bench1</code></pre>
+<pre><code>## # A tibble: 1 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 boot_slow     36.9s    36.9s    0.0271    12.7MB        0</code></pre>
+<p><code>vcovBS()</code> finishes in around 37 seconds - that’s not too bad, isn’t it?</p>
 <pre class="r"><code># wild cluster bootstrap via fwildclusterboot::boottest()
 bench1f &lt;- 
 bench::mark(boot_fast =
@@ -158,8 +163,8 @@ bench1f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast    75.1ms   84.7ms      8.72      99MB     29.7</code></pre>
-<p>While <code>sandwich::vcovBS()</code> takes almost 30.42 seconds, <code>fwildclusterboot::boottest()</code> runs in around one fifth of a second 🚀. Yes, really: one fifth of a second! That’s a speed gain of a factor of 359! If you don’t have 4 cores available, performance differences get even more extreme (e.g. if you only have one core, you have to multiply 30 with a number slightly smaller than 4).</p>
+## 1 boot_fast    73.3ms   81.7ms      9.48    98.7MB     26.2</code></pre>
+<p>While <code>sandwich::vcovBS()</code> takes almost 36.9 seconds, <code>fwildclusterboot::boottest()</code> runs in around one fifth of a second 🚀. Yes, really: one fifth of a second! That’s a speed gain of a factor of 451! If you don’t have 4 cores available, performance differences get even more extreme (e.g. if you only have one core, you have to multiply 37 with a number slightly smaller than 4).</p>
 <p>How do <code>vcovBS()'s</code> and <code>boottest()'s</code> results compare?</p>
 <pre class="r"><code>summary(boot_fast)</code></pre>
 <pre><code>## boottest.lm(object = lm_fit, clustid = c(&quot;group_id1&quot;), param = &quot;treatment&quot;, 
@@ -177,10 +182,10 @@ bench1f</code></pre>
 ## 1 1*treatment = 0    0.002     0.516   0.605   -0.007     0.012</code></pre>
 <pre class="r"><code>lmtest::coeftest(x = lm_fit, vcov = boot_slow)[2,]</code></pre>
 <pre><code>##    Estimate  Std. Error     t value    Pr(&gt;|t|) 
-## 0.002387792 0.004592932 0.519884080 0.603155903</code></pre>
+## 0.002387792 0.004571759 0.522291836 0.601478745</code></pre>
 <pre class="r"><code>lmtest::coefci(x = lm_fit, vcov = boot_slow)[2,]</code></pre>
 <pre><code>##        2.5 %       97.5 % 
-## -0.006615281  0.011390866</code></pre>
+## -0.006573777  0.011349362</code></pre>
 <p>Between the two implementations, the bootstrapped t-statistics, p-values and confidence intervals are almost identical. They are not exactly identical for two reasons: first due to sampling uncertainty in the bootstrap, and second because <code>vcovBS</code> does not apply any small sample adjustments (at least I could not find anything related to small-sample adjustments in both documentation and source code).</p>
 <p>The speed gains of <code>fwildclusterboot</code> scale well in the number of bootstrap iterations. For <span class="math inline">\(B = 99.999\)</span> iterations, it finishes in around one second. For <code>vcovBS</code>, you can expect a linear increase in run-time in the number of bootstrap iterations: a ten-fold increase in bootstrap iterations will increase run-time to around 360 seconds.</p>
 <pre class="r"><code>B &lt;- 99999
@@ -201,7 +206,7 @@ bench2f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast     541ms    553ms      1.77     727MB     15.4</code></pre>
+## 1 boot_fast     476ms    571ms      1.72     727MB     11.4</code></pre>
 <p>What happens if we increase the sample size to <span class="math inline">\(N = 100.000\)</span>?</p>
 <pre class="r"><code>N &lt;- 100000
 data &lt;- fwildclusterboot:::create_data(N = N,
@@ -224,8 +229,8 @@ bench3</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_slow     7.87m    7.87m   0.00212    31.2MB        0</code></pre>
-<p>More than 7 minutes pass before <code>vcovBS()</code> finishes. How does <code>boottest()</code> do in comparison?</p>
+## 1 boot_slow     8.32m    8.32m   0.00200    31.2MB        0</code></pre>
+<p>More than 8 minutes pass before <code>vcovBS()</code> finishes. How does <code>boottest()</code> do in comparison?</p>
 <pre class="r"><code># wild cluster bootstrap via fwildclusterboot::boottest()
 
 bench3f &lt;- 
@@ -242,8 +247,8 @@ bench3f</code></pre>
 <pre><code>## # A tibble: 1 x 6
 ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 boot_fast     331ms    352ms      2.57     308MB     9.78</code></pre>
-<p>With <code>B = 9999</code> iterations, <code>boottest()</code> runs for around 0.35 seconds, while <code>vcovBS()</code> only finishes after 472.16 seconds. <code>fwildclusterboot::boottest()</code> is 1340 times faster than <code>sandwich::vcovBS</code>!</p>
+## 1 boot_fast     310ms    333ms      2.68     308MB     10.7</code></pre>
+<p>With <code>B = 9999</code> iterations, <code>boottest()</code> runs for around 0.33 seconds, while <code>vcovBS()</code> only finishes after 499.36 seconds. <code>fwildclusterboot::boottest()</code> is 1499 times faster than <code>sandwich::vcovBS</code>!</p>
 <p>As a conclusion: if you face a “small number of clusters” problem and want to reduce your daily ☕ consumption, you should consider using <a href="https://github.com/s3alfisc/fwildclusterboot">fwildclusterboot</a>, Stata’s <a href="https://github.com/droodman/boottest">boottest</a>, or <a href="https://github.com/droodman/WildBootTests.jl">WildBootTests.jl</a>, which is a novel Julia implementation of the “fast algorithm”. If all of this seems like black magic to you and you want to learn more about the “fast algorithm”, I cannot recommend the “Fast &amp; Wild” paper highly enough.</p>
 <div id="literature" class="section level2">
 <h2>Literature</h2>

@@ -16,7 +16,7 @@ ignoreFiles:
   - \.knit\.md$
   - \.utf8\.md$
 params:
-  faviconfile: images/favicon.png
+  faviconfile: images/duerer_lion.png
   highlightjs: yes
   highlightjslanguages:
     - r

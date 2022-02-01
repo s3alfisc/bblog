@@ -1,5 +1,5 @@
 ---
-title: 1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot
+title: 1000x faster Wild Cluster Bootstrap Inference in R with fwildclusterboot `r emo::ji("rocket")`
 author: Alexander Fischer
 date: 2021-12-12
 slug: 1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot
@@ -66,6 +66,7 @@ bench::mark(
                                 cores = 4), 
   iterations = 1
 )
+bench1
 ```
 
 `vcovBS()` finishes in around `r round(as.numeric(bench1$median), 0)` seconds - that's not too bad, isn't it?

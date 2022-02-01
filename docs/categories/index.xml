@@ -4,7 +4,39 @@
     <title></title>    <link>https://s3alfisc.github.io/blog/categories/</link>
     <description>Recent blog posts by </description>    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>clustered errors</title>
+      <link>https://s3alfisc.github.io/blog/categories/clustered-errors/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/categories/clustered-errors/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>Satterthwaite correction</title>
+      <link>https://s3alfisc.github.io/blog/categories/satterthwaite-correction/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/categories/satterthwaite-correction/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>statistical inference</title>
+      <link>https://s3alfisc.github.io/blog/categories/statistical-inference/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/categories/statistical-inference/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>wild cluster bootstrap</title>
+      <link>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</guid>
+   <description></description>    </item>
+    
     <item>
       <title>blogdown</title>
       <link>https://s3alfisc.github.io/blog/categories/blogdown/</link>
@@ -59,22 +91,6 @@
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/categories/econometrics/</guid>
-   <description></description>    </item>
-    
-    <item>
-      <title>statistical inference</title>
-      <link>https://s3alfisc.github.io/blog/categories/statistical-inference/</link>
-      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/categories/statistical-inference/</guid>
-   <description></description>    </item>
-    
-    <item>
-      <title>wild cluster bootstrap</title>
-      <link>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</link>
-      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/categories/wild-cluster-bootstrap/</guid>
    <description></description>    </item>
     
   </channel>
