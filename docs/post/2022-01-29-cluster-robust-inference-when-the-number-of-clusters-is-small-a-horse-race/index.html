@@ -111,7 +111,7 @@
 <!-- Have you ever heard of Satterthwaite degree-of-freedom bias-corrections for cluster robust standard error estimation? -->
 <!-- Well, I myself have never seen them used in any applied econometrics paper \footnote{As it happens, Angrist \& Lavy ... }. But while writing this blog post, I realized that both the survey paper by [Cameron & Miller](http://cameron.econ.ucdavis.edu/research/Cameron_Miller_JHR_2015_February.pdf) and Mostly Harmless Econometrics both discuss ... -->
 <p>Nevertheless, there is a statistical literature that argues that it is fine to use cluster robust sandwich estimators to compute standard errors for a small number of clusters as long as one applies an appropriate <strong>small sample correction</strong> via <strong>Satterthwaite</strong> or <strong>saddlepoint corrections</strong> (Imbens &amp; Kolesar, Bell, Tipton &amp; Pustejovksy).
-All these methods are implemented in R via the <code>clubSandwich</code> package and in Stata in the <a href="https://github.com/jepusto/clubSandwich-Stata">clubSandwich-Stata</a> packages.</p>
+All these methods are implemented in R via the <code>clubSandwich</code> package and in Stata in the <a href="https://github.com/jepusto/clubSandwich-Stata">clubSandwich-Stata</a> package.</p>
 <p>Of course I was curious to see how the Satterthwaite-corrected SEs would perform in comparison to the would cluster bootstrap, so I decided to run some simulations.</p>
 <p>Luckily for me, Gordon published all of his code <a href="https://github.com/gburtch/simulating_cluster_SEs">on github</a>, so it was easy for me to slightly tweak it and add simulations for Satterthwaite corrections. Open software is really awesome!</p>
 <p>I have collected my minor updates of Gordon’s code in an R package, which is available on <a href="https://github.com/s3alfisc/clusteredErrorsSims">github</a>. To reproduce all analyses below, you simply have to install the package by running</p>
@@ -132,14 +132,11 @@ devtools::install_github(&quot;s3alfisc/clusteredErrorsSims&quot;)</code></pre>
   y_{ig} = \beta_0 + \beta_1 X_{ig} + \epsilon_{ig}
 \]</span></p>
 <p>where <span class="math inline">\(E(\epsilon_{ig}|X_{ig}) = 0\)</span>, <span class="math inline">\(\beta_0 = 1\)</span>, <span class="math inline">\(\beta_1 = 0.5\)</span> and the errors <span class="math inline">\(\epsilon_{ig}\)</span> are simulated to be correlated within <span class="math inline">\(G\)</span> clusters with intra-cluster correlation <span class="math inline">\(\rho\)</span>. All errors are uncorrelated across clusters.</p>
-</div>
-<div id="a-race" class="section level2">
-<h2>A 🐴 Race</h2>
-<p>So the stage is set for a horse race! My champion, of course, is the wild cluster bootstrap, but let’s see how the bias-corrected standard errors perform in comparison!</p>
-<div class="figure"><span style="display:block;" id="fig:pressure"></span>
-<img src="FranzMarcTurm.png" alt="Franz Mark, Turm der blauen Pferde" width="75%" />
+<p>So the stage is set for a 🐴 race! My champion, of course, is the wild cluster bootstrap, but let’s see how the bias-corrected standard errors perform in comparison!</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pressure"></span>
+<img src="Le_jockey.jpg" alt="Toulose-Lautrec, Le Jockey, 1899" width="75%" />
 <p class="caption">
-Figure 1: Franz Mark, Turm der blauen Pferde
+Figure 1: Toulose-Lautrec, Le Jockey, 1899
 </p>
 </div>
 <div id="simulation-1-small-number-of-clusters-g-balanced-cluster-sizes" class="section level4">
@@ -149,7 +146,7 @@ Figure 1: Franz Mark, Turm der blauen Pferde
 set.seed(1234)
 sim_balanced_clusters(n = 1000, n_sims = 1000, rho = 0.7, workers = 4)</code></pre>
 <p>Here are the results for the first simulation:</p>
-<div class="figure"><span style="display:block;" id="fig:Result1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Result1"></span>
 <img src="CI%20Coverage%20for%20Several%20Cluster%20Robust%20Inference%20Methods.png" alt="Simulation results. N = 1000, rho = 0.7, balanced cluster sizes" width="75%" />
 <p class="caption">
 Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
@@ -178,12 +175,12 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 </div>
 <div id="treatment-effects" class="section level4">
 <h4>Treatment Effects</h4>
-<p>The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. “How much should we trust DiD with few treated clusters?”). For the sake of simplicity, I do not simulate a “full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing <span class="math inline">\(X_ig\)</span> in the model above by a treatment assignment dummy <span class="math inline">\(D_{ig}\)</span>. (Loosely) following MacKinnon &amp; Webb once again, I then simulate <span class="math inline">\(N=2000\)</span> observations with intra-cluster correlation <span class="math inline">\(\rho = 0.5\)</span> and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters <span class="math inline">\(P \in \{1/50, ..., 1\}\)</span>, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.</p>
+<p>The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. <a href="https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;login=false">“How much should we trust DiD estimates?</a>“). For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing <span class="math inline">\(X_{ig}\)</span> in the model above by a treatment assignment dummy <span class="math inline">\(D_{ig}\)</span>. (Loosely) following MacKinnon &amp; Webb once again, I then simulate <span class="math inline">\(N=2000\)</span> observations with intra-cluster correlation <span class="math inline">\(\rho = 0.5\)</span> and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters <span class="math inline">\(P \in \{1/50, ..., 1\}\)</span>, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.</p>
 <pre class="r"><code>treatment_effect_sim(n = 2000, n_sims = 5000, workers = 4)</code></pre>
 <div class="figure" style="text-align: center">
-<img src="treatment_simulations.png" alt="Treatment Effect Simulations, N = 2000, 50 clusters, wildly different cluster sizes" width="75%" />
+<img src="treatment_simulations.png" alt="Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size." width="75%" />
 <p class="caption">
-(#fig:Figure 4)Treatment Effect Simulations, N = 2000, 50 clusters, wildly different cluster sizes
+(#fig:Figure_four)Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.
 </p>
 </div>
 <p>Once again, there is no visible difference in performance between debiased standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.</p>

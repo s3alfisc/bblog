@@ -24,7 +24,7 @@
 &lt;!-- Have you ever heard of Satterthwaite degree-of-freedom bias-corrections for cluster robust standard error estimation? --&gt;
 &lt;!-- Well, I myself have never seen them used in any applied econometrics paper \footnote{As it happens, Angrist \&amp; Lavy ... }. But while writing this blog post, I realized that both the survey paper by [Cameron &amp; Miller](http://cameron.econ.ucdavis.edu/research/Cameron_Miller_JHR_2015_February.pdf) and Mostly Harmless Econometrics both discuss ... --&gt;
 &lt;p&gt;Nevertheless, there is a statistical literature that argues that it is fine to use cluster robust sandwich estimators to compute standard errors for a small number of clusters as long as one applies an appropriate &lt;strong&gt;small sample correction&lt;/strong&gt; via &lt;strong&gt;Satterthwaite&lt;/strong&gt; or &lt;strong&gt;saddlepoint corrections&lt;/strong&gt; (Imbens &amp;amp; Kolesar, Bell, Tipton &amp;amp; Pustejovksy).
-All these methods are implemented in R via the &lt;code&gt;clubSandwich&lt;/code&gt; package and in Stata in the &lt;a href=&#34;https://github.com/jepusto/clubSandwich-Stata&#34;&gt;clubSandwich-Stata&lt;/a&gt; packages.&lt;/p&gt;
+All these methods are implemented in R via the &lt;code&gt;clubSandwich&lt;/code&gt; package and in Stata in the &lt;a href=&#34;https://github.com/jepusto/clubSandwich-Stata&#34;&gt;clubSandwich-Stata&lt;/a&gt; package.&lt;/p&gt;
 &lt;p&gt;Of course I was curious to see how the Satterthwaite-corrected SEs would perform in comparison to the would cluster bootstrap, so I decided to run some simulations.&lt;/p&gt;
 &lt;p&gt;Luckily for me, Gordon published all of his code &lt;a href=&#34;https://github.com/gburtch/simulating_cluster_SEs&#34;&gt;on github&lt;/a&gt;, so it was easy for me to slightly tweak it and add simulations for Satterthwaite corrections. Open software is really awesome!&lt;/p&gt;
 &lt;p&gt;I have collected my minor updates of Gordon’s code in an R package, which is available on &lt;a href=&#34;https://github.com/s3alfisc/clusteredErrorsSims&#34;&gt;github&lt;/a&gt;. To reproduce all analyses below, you simply have to install the package by running&lt;/p&gt;
@@ -45,14 +45,11 @@ devtools::install_github(&amp;quot;s3alfisc/clusteredErrorsSims&amp;quot;)&lt;/c
   y_{ig} = \beta_0 + \beta_1 X_{ig} + \epsilon_{ig}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(E(\epsilon_{ig}|X_{ig}) = 0\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_0 = 1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_1 = 0.5\)&lt;/span&gt; and the errors &lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ig}\)&lt;/span&gt; are simulated to be correlated within &lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt; clusters with intra-cluster correlation &lt;span class=&#34;math inline&#34;&gt;\(\rho\)&lt;/span&gt;. All errors are uncorrelated across clusters.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;a-race&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;A 🐴 Race&lt;/h2&gt;
-&lt;p&gt;So the stage is set for a horse race! My champion, of course, is the wild cluster bootstrap, but let’s see how the bias-corrected standard errors perform in comparison!&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:pressure&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;FranzMarcTurm.png&#34; alt=&#34;Franz Mark, Turm der blauen Pferde&#34; width=&#34;75%&#34; /&gt;
+&lt;p&gt;So the stage is set for a 🐴 race! My champion, of course, is the wild cluster bootstrap, but let’s see how the bias-corrected standard errors perform in comparison!&lt;/p&gt;
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:pressure&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;Le_jockey.jpg&#34; alt=&#34;Toulose-Lautrec, Le Jockey, 1899&#34; width=&#34;75%&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
-Figure 1: Franz Mark, Turm der blauen Pferde
+Figure 1: Toulose-Lautrec, Le Jockey, 1899
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;simulation-1-small-number-of-clusters-g-balanced-cluster-sizes&#34; class=&#34;section level4&#34;&gt;
@@ -62,7 +59,7 @@ Figure 1: Franz Mark, Turm der blauen Pferde
 set.seed(1234)
 sim_balanced_clusters(n = 1000, n_sims = 1000, rho = 0.7, workers = 4)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here are the results for the first simulation:&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:Result1&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:Result1&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;CI%20Coverage%20for%20Several%20Cluster%20Robust%20Inference%20Methods.png&#34; alt=&#34;Simulation results. N = 1000, rho = 0.7, balanced cluster sizes&#34; width=&#34;75%&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
@@ -91,12 +88,12 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 &lt;/div&gt;
 &lt;div id=&#34;treatment-effects&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Treatment Effects&lt;/h4&gt;
-&lt;p&gt;The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. “How much should we trust DiD with few treated clusters?”). For the sake of simplicity, I do not simulate a “full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing &lt;span class=&#34;math inline&#34;&gt;\(X_ig\)&lt;/span&gt; in the model above by a treatment assignment dummy &lt;span class=&#34;math inline&#34;&gt;\(D_{ig}\)&lt;/span&gt;. (Loosely) following MacKinnon &amp;amp; Webb once again, I then simulate &lt;span class=&#34;math inline&#34;&gt;\(N=2000\)&lt;/span&gt; observations with intra-cluster correlation &lt;span class=&#34;math inline&#34;&gt;\(\rho = 0.5\)&lt;/span&gt; and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters &lt;span class=&#34;math inline&#34;&gt;\(P \in \{1/50, ..., 1\}\)&lt;/span&gt;, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.&lt;/p&gt;
+&lt;p&gt;The last simulation investigates a topic that has received considerable attention: regression models where the treatment occurs at the cluster level, but only few clusters are treated (e.g. &lt;a href=&#34;https://academic.oup.com/qje/article-abstract/119/1/249/1876068?redirectedFrom=fulltext&amp;amp;login=false&#34;&gt;“How much should we trust DiD estimates?&lt;/a&gt;“). For the sake of simplicity, I do not simulate a”full” DiD model with 2-way fixed effects and potential error correlations across time but restrict myself to replacing &lt;span class=&#34;math inline&#34;&gt;\(X_{ig}\)&lt;/span&gt; in the model above by a treatment assignment dummy &lt;span class=&#34;math inline&#34;&gt;\(D_{ig}\)&lt;/span&gt;. (Loosely) following MacKinnon &amp;amp; Webb once again, I then simulate &lt;span class=&#34;math inline&#34;&gt;\(N=2000\)&lt;/span&gt; observations with intra-cluster correlation &lt;span class=&#34;math inline&#34;&gt;\(\rho = 0.5\)&lt;/span&gt; and vary the number of clusters that are treated. The simulations are repeated for different treated proportions of clusters &lt;span class=&#34;math inline&#34;&gt;\(P \in \{1/50, ..., 1\}\)&lt;/span&gt;, where the clusters are a) of equal size, b) US-state sized and sorted in increasing order and c) US-state sized and sorted in decreasing order.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;treatment_effect_sim(n = 2000, n_sims = 5000, workers = 4)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;
-&lt;img src=&#34;treatment_simulations.png&#34; alt=&#34;Treatment Effect Simulations, N = 2000, 50 clusters, wildly different cluster sizes&#34; width=&#34;75%&#34; /&gt;
+&lt;img src=&#34;treatment_simulations.png&#34; alt=&#34;Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.&#34; width=&#34;75%&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
-(#fig:Figure 4)Treatment Effect Simulations, N = 2000, 50 clusters, wildly different cluster sizes
+(#fig:Figure_four)Treatment Effect Simulations, N = 2000, 50 clusters, treatment effects. The x axis denotes the share of treated clusters, either in increasing or decreasing cluster size.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Once again, there is no visible difference in performance between debiased standard errors and the wild cluster bootstrap, but the CRVE tends to overreject in all three scenarios.&lt;/p&gt;
@@ -128,161 +125,6 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1601.01981.pdf&#34;&gt;Pustejovsky &amp;amp; Tipton - “Small-sample methods for cluster-robust variance estimation and hypothesis testing in fixed effects models”, Journal of Economics and Business Statistics (2018)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.econstor.eu/bitstream/10419/97480/1/757403891.pdf&#34;&gt;Webb - “Reworking wild bootstrap based inference for clustered errors”, Working Paper (2013)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
-</description>    </item>
-    
-    <item>
-      <title>Inverting p-values to obtain a Confidence Interval</title>
-      <link>https://s3alfisc.github.io/blog/post/2022-01-27-inverting-p-values-to-obtaina-confidence-interval/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/post/2022-01-27-inverting-p-values-to-obtaina-confidence-interval/</guid>
-   <description>
-&lt;script src=&#34;https://s3alfisc.github.io/blog/post/2022-01-27-inverting-p-values-to-obtaina-confidence-interval/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;The &lt;code&gt;boottest()&lt;/code&gt; functions in &lt;code&gt;fwildclusterboot&lt;/code&gt; does not compute standard errors, but it does compute confidence intervals. But wait a minute - how is it possible to compute confidence intervals without computing standard errors?&lt;/p&gt;
-&lt;!-- At the very end of the &#34;bible&#34; of applied econometrics, Angrist &amp; Pischke discuss different methods to adjust standard errors for regression models with errors clustered into few groups.  --&gt;
-&lt;!-- A famous paper by Cameron, Gelbach &amp; Miller argues to address this by using pivotal (t-statistics).  --&gt;
-&lt;p&gt;In order to explain this, we need to go back to the definition of a confidence interval (we’ll closely follow the exposition in &lt;a href=&#34;https://www.ssc.wisc.edu/~bhansen/probability/Probability.pdf&#34;&gt;Hansen’s probability and statistics lecture notes, Section 14.9&lt;/a&gt;).&lt;/p&gt;
-&lt;div id=&#34;what-is-a-confidence-interval&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;What is a Confidence Interval?&lt;/h2&gt;
-&lt;p&gt;Suppose we have a parameter &lt;span class=&#34;math inline&#34;&gt;\(\theta \in \Theta\)&lt;/span&gt; and a test statistic &lt;span class=&#34;math inline&#34;&gt;\(T(\theta)\)&lt;/span&gt;. We also have a critical value &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; so that to test the null hypothesis &lt;span class=&#34;math inline&#34;&gt;\(H_0: \theta = \theta_0\)&lt;/span&gt; againt &lt;span class=&#34;math inline&#34;&gt;\(H_1: \theta \neq \theta_0\)&lt;/span&gt; at a level &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;, we reject the null hypothesis if &lt;span class=&#34;math inline&#34;&gt;\(T(\theta_0) &amp;gt; c\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Let’s define a set that includes all values of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; for which the decision rule “reject the null hypothesis if &lt;span class=&#34;math inline&#34;&gt;\(T(\theta)\geq c\)&lt;/span&gt;” leads to an acceptance of the null hypothesis:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-  C = \{\theta \in \Theta: T(\theta)\leq c \}.
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;If the test has (asymptotic) size &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;, then C is an (asymptotic) confidence interval for &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; at level &lt;span class=&#34;math inline&#34;&gt;\(1-\alpha\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\begin{align}
-  P(\theta_0 \in C | H_0 \text{ true}) &amp;amp;= P(T(\theta_0) \leq c| H_0 \text{ true}) \\ 
-  &amp;amp;= 1 - P(T(\theta_0) \leq c| H_0 \text{ true}) \\
-  &amp;amp;= \alpha
-\end{align}
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;By definition of the p-value, the decision “reject &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; if &lt;span class=&#34;math inline&#34;&gt;\(T(\theta_0) \leq c\)&lt;/span&gt;” is equivalent to the decision rule of “reject &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; if for the p-value &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; we have &lt;span class=&#34;math inline&#34;&gt;\(p &amp;gt; \alpha\)&lt;/span&gt;”.&lt;/p&gt;
-&lt;p&gt;In consequence, we can also define the confidence interval at significance level &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; as
-&lt;span class=&#34;math display&#34;&gt;\[
-  C = \{\theta \in \Theta: p(\theta) \geq \alpha \}.
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;The confidence interval is the set of all values &lt;span class=&#34;math inline&#34;&gt;\(\theta \in \Theta\)&lt;/span&gt; with p-value larger than the chosen significance level &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;All of this implies that if we have a function that calculates p-values for different values of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(p(\theta)\)&lt;/span&gt;, to obtain a confidence interval, we simply have to collect all values &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; for which &lt;span class=&#34;math inline&#34;&gt;\(p(\theta) &amp;gt; \alpha\)&lt;/span&gt;. Or, in other words, we need to &lt;em&gt;invert&lt;/em&gt; &lt;span class=&#34;math inline&#34;&gt;\(p(\theta)\)&lt;/span&gt;.&lt;/p&gt;
-&lt;!-- We can hence proceeds in two steps to invert p-values to obtain confidence intervals:  --&gt;
-&lt;!-- + First, we need to find two starting values $\theta_{lower}$ and $\theta_{upper}$ for which  --&gt;
-&lt;!--   $p(\theta_{start} + \epsilon ;X, y) &lt; \alpha$ and $p(\theta_{start} - \epsilon ;X, y) &gt; \alpha$. --&gt;
-&lt;!-- + After having decided on two starting values, we can initiate a root-finding procedure to find the value between $\theta_{lower} + \epsilon$ and $\theta_{lower} - \epsilon$ where is for which ... exactly alpha.  --&gt;
-&lt;!-- In the following, I will focus on step 2: giving a regression model,a p-value associated with a hypothesis and a pair of starting values, how can we *invert* p-values to obtain confidence intervals?    --&gt;
-&lt;/div&gt;
-&lt;div id=&#34;example-calculating-a-confidence-interval-for-a-simple-linear-regression-model&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Example: Calculating a confidence interval for a simple linear regression model&lt;/h2&gt;
-&lt;p&gt;We will illustrate how to calculate a confidence interval based on a simple linear regression model.&lt;/p&gt;
-&lt;p&gt;The data generating process will be&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ 
-  Y = \beta_0 + \beta_1 X + u
-\]&lt;/span&gt;
-with &lt;span class=&#34;math inline&#34;&gt;\(E[u|X] = 0\)&lt;/span&gt;, and we are interested in testing the null hypothesis&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-  H_0: \beta_1 = 0    \textit{ vs } H_1: \beta_1 \neq 0.
-\]&lt;/span&gt;
-As usually, we start with simulating some data from a regression model:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(21348534)
-
-N &amp;lt;- 10000
-X &amp;lt;- rnorm(N)
-y &amp;lt;- 1 + 0.01 * X + rnorm(N)
-df &amp;lt;- data.frame(X = X, y = y)
-
-fit &amp;lt;- (lm(y ~ 1 + X, data = df))
-#point_estimate &amp;lt;- summary(fit)$coefficients[,&amp;quot;Estimate&amp;quot;]
-#se &amp;lt;- summary(fit)$coefficients[,&amp;quot;Std. Error&amp;quot;]
-#summary(fit)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The estimated confidence interval of the regression model is&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;confint(fit)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                    2.5 %     97.5 %
-## (Intercept)  0.964052355 1.00325628
-## X           -0.007654199 0.03204427&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that this confidence interval is build on &lt;em&gt;estimated standard errors&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;This means that in order to calculate standard errors, &lt;code&gt;confint()&lt;/code&gt; …&lt;/p&gt;
-&lt;p&gt;To compute a confidence without estimating standard errors, we first need to define a function that calculates p-values for different values of &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; given the model and data. To do so, we will simply create a function that will allow us to test hypotheses of the form&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-  H_0: \beta_1 - r = 0    \textit{ vs } H_1: \beta_1 -r \neq 0.
-\]&lt;/span&gt;
-for different values of &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;,
-which is of course equivalent to testing&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-    H_0: \beta_1 = r     \textit{ vs } H_1: \beta_1  \neq r.
-\]&lt;/span&gt;
-Tests of such a form are implemented in the &lt;code&gt;car&lt;/code&gt; package, via the &lt;code&gt;linearHypothesis&lt;/code&gt; function, and we create a small wrapper function, &lt;code&gt;p_val(y, X, r)&lt;/code&gt; around &lt;code&gt;car::linearHypothesis&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p_val &amp;lt;- function(y, X, r){
-  res &amp;lt;- lm(y ~ 1 + X)
-  p_val &amp;lt;- car::linearHypothesis(model = res, hypothesis.matrix = c(0,1), rhs = r)$`Pr(&amp;gt;F)`[2]
-  p_val
-}
-
-#p_val(y = y, X = X, r = 0)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As can be seen in the plot below, for different values of &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;, &lt;code&gt;p_val()&lt;/code&gt; returns a range of p-values:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p_val_r &amp;lt;- unlist(lapply(seq(-0.05, 0.05, 0.005), function(i) p_val(y = y, X = X, r = i)))
-p_val_df &amp;lt;- data.frame(r = seq(-0.05, 0.05, 0.005), p_val_r = p_val_r)
-plot(x = p_val_df$r, y = p_val_df$p_val_r,type = &amp;quot;b&amp;quot;, pch = 20, lty = 2, xlab = &amp;quot;r&amp;quot;, ylab = &amp;quot;p-value&amp;quot;)
-lines(p_val_df$r, p_val_df$p_val_r, type = &amp;quot;l&amp;quot;, lty = 1)
-abline(h = 0.05, col = &amp;quot;red&amp;quot;) 
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][1], col = &amp;quot;blue&amp;quot;)
-text(x = confint(fit)[&amp;quot;X&amp;quot;, ][1] - 0.03, y = 0.8, &amp;quot;lower&amp;quot;, srt=0.2, col = &amp;quot;blue&amp;quot;)
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][2], col = &amp;quot;blue&amp;quot;)
-text(x = confint(fit)[&amp;quot;X&amp;quot;, ][2] + 0.03, y = 0.8, &amp;quot;upper&amp;quot;, srt=0.2, col = &amp;quot;blue&amp;quot;)
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][1] - 0.01, col = &amp;quot;green&amp;quot;, lty = 2)
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][1] + 0.01, col = &amp;quot;green&amp;quot;, lty = 2)
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][2] - 0.01, col = &amp;quot;green&amp;quot;, lty = 2)
-abline(v = confint(fit)[&amp;quot;X&amp;quot;, ][2] + 0.01, col = &amp;quot;green&amp;quot;, lty = 2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://s3alfisc.github.io/blog/post/2022-01-27-inverting-p-values-to-obtaina-confidence-interval/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The p-value of course peaks for the “true” null hypothesis &lt;span class=&#34;math inline&#34;&gt;\(\beta_1 = r = 0.01\)&lt;/span&gt; and decreases when moving further away from the true value.&lt;/p&gt;
-&lt;p&gt;The two points where the red line crosses with the black line - marked by a blue line - are the confidence interval for our hypothesis test of interest!&lt;/p&gt;
-&lt;p&gt;Our goal is to find the intersection of the blue, red, and black lines.&lt;/p&gt;
-&lt;p&gt;To do so, we need to find two starting values for the line search. Those are marked as green. In practice, &lt;code&gt;boottest()&lt;/code&gt; needs to do some work to find these starting values, but here we will skip this step.&lt;/p&gt;
-&lt;p&gt;We will start from the empirical confidence interval calculated by &lt;code&gt;confint()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;confint(fit)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                    2.5 %     97.5 %
-## (Intercept)  0.964052355 1.00325628
-## X           -0.007654199 0.03204427&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We create two sets of starting values by adding a value &lt;span class=&#34;math inline&#34;&gt;\(\epsilon \neq 0\)&lt;/span&gt; to the confidence boundaries so that &lt;span class=&#34;math inline&#34;&gt;\(p(\beta_1 + \epsilon)\)&lt;/span&gt; … of the confidence set obtained by &lt;code&gt;confint()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;epsilon &amp;lt;- 0.01
-
-startset1 &amp;lt;- confint(fit)[&amp;quot;X&amp;quot;,][1] + c(-epsilon, epsilon)
-startset2 &amp;lt;- confint(fit)[&amp;quot;X&amp;quot;,][2] + c(-epsilon, epsilon)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With these starting values at hand, we can invert &lt;span class=&#34;math inline&#34;&gt;\(p(.)\)&lt;/span&gt; numerically by a unit root procedure - we will run a simple bisection.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;invert_p_val &amp;lt;- function(X, y, startset1, startset2, alpha){
-  
-  # p-val - sign_level 
-  p_val_x_sign_level &amp;lt;- function(r) {
-    p_val(X = X, y = y, r) - alpha
-  }
-  
-  # bisection for both startset1, startset2
-  res &amp;lt;- lapply(list(startset1, startset2), function(x){ 
-                  
-          tmp &amp;lt;- suppressWarnings(stats::uniroot(f = p_val_x_sign_level,
-                                  lower = min(x),
-                                  upper = max(x),
-                                  tol = 1e-08,
-                                  maxiter = 10)$root)
-
-          })
-
-  unlist(res)
-  
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;results&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Results&lt;/h2&gt;
-&lt;p&gt;Now, which confidence interval do we get from the numerical p-value inversion?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;invert_p_val(X = X, y = y, startset1 = startset1, startset2 = startset2, alpha = 0.05)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -0.007654199  0.032044270&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As it turns out, this confidence interval is practically identical with the confidence interval based on estimated standard errors:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;confint(fit)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                    2.5 %     97.5 %
-## (Intercept)  0.964052355 1.00325628
-## X           -0.007654199 0.03204427&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We have successfully inverted p-values to obtain a confidence interval &lt;em&gt;without calculating a standard error&lt;/em&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>    </item>
     
