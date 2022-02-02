@@ -85,8 +85,8 @@ knitr::include_graphics("CI Coverage for Several Cluster Robust Inference Method
 There are three takeaways from figure 2: 
 
 + As expected, inference with non-robust standard errors is severely biased. 
-+ Inference via cluster robust estimators tends to under-reject for less than 50 clusters. 
-+ The wild cluster bootstrap **and** cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of $3 \leq G \leq 10$, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly under-rejects. 
++ Inference via cluster robust estimators tends to over-reject the null hypothesis of no effect for less than 50 clusters. 
++ The wild cluster bootstrap **and** cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of $3 \leq G \leq 10$, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly over-rejects. 
 
 #### Simulation 2: Wildly different cluster sizes
 
@@ -96,7 +96,7 @@ Instead of simulating balanced cluster sizes, I now follow [MacKinnon & Webb](ht
 knitr::include_graphics("wildly_different.png")
 ```
 
-Both for $G = 50$ and $G = 100$, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations $\rho$. The unadjusted CRVE estimates instead tend to under-reject. 
+Both for $G = 50$ and $G = 100$, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations $\rho$. The unadjusted CRVE estimates instead tend to over-reject. 
 
 You can reproduce Figure 2 by running 
 

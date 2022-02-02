@@ -60,8 +60,8 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 <p>There are three takeaways from figure 2:</p>
 <ul>
 <li>As expected, inference with non-robust standard errors is severely biased.</li>
-<li>Inference via cluster robust estimators tends to under-reject for less than 50 clusters.</li>
-<li>The wild cluster bootstrap <strong>and</strong> cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of <span class="math inline">\(3 \leq G \leq 10\)</span>, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly under-rejects.</li>
+<li>Inference via cluster robust estimators tends to over-reject the null hypothesis of no effect for less than 50 clusters.</li>
+<li>The wild cluster bootstrap <strong>and</strong> cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of <span class="math inline">\(3 \leq G \leq 10\)</span>, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly over-rejects.</li>
 </ul>
 </div>
 <div id="simulation-2-wildly-different-cluster-sizes" class="section level4">
@@ -73,7 +73,7 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cluster sizes
 </p>
 </div>
-<p>Both for <span class="math inline">\(G = 50\)</span> and <span class="math inline">\(G = 100\)</span>, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations <span class="math inline">\(\rho\)</span>. The unadjusted CRVE estimates instead tend to under-reject.</p>
+<p>Both for <span class="math inline">\(G = 50\)</span> and <span class="math inline">\(G = 100\)</span>, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations <span class="math inline">\(\rho\)</span>. The unadjusted CRVE estimates instead tend to over-reject.</p>
 <p>You can reproduce Figure 2 by running</p>
 <pre class="r"><code>wildly_different_sim(n = 2000, n_sims = 5000, workers = 4)</code></pre>
 <p>Once again, note that this function will run for a very long time.</p>
