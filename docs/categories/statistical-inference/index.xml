@@ -68,8 +68,8 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 &lt;p&gt;There are three takeaways from figure 2:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;As expected, inference with non-robust standard errors is severely biased.&lt;/li&gt;
-&lt;li&gt;Inference via cluster robust estimators tends to under-reject for less than 50 clusters.&lt;/li&gt;
-&lt;li&gt;The wild cluster bootstrap &lt;strong&gt;and&lt;/strong&gt; cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of &lt;span class=&#34;math inline&#34;&gt;\(3 \leq G \leq 10\)&lt;/span&gt;, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly under-rejects.&lt;/li&gt;
+&lt;li&gt;Inference via cluster robust estimators tends to over-reject the null hypothesis of no effect for less than 50 clusters.&lt;/li&gt;
+&lt;li&gt;The wild cluster bootstrap &lt;strong&gt;and&lt;/strong&gt; cluster robust variance estimator with Satterthwaite correction perform astonishingly well for 3 or more clusters. For a number of cluster with of &lt;span class=&#34;math inline&#34;&gt;\(3 \leq G \leq 10\)&lt;/span&gt;, the Satterthwaite correction seems to perform slightly better than the wild cluster bootstrap, which very mildly over-rejects.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;simulation-2-wildly-different-cluster-sizes&#34; class=&#34;section level4&#34;&gt;
@@ -81,7 +81,7 @@ Figure 2: Simulation results. N = 1000, rho = 0.7, balanced cluster sizes
 Figure 3: Simulation results. N = 2000, 50 and 100 clusters, wildly different cluster sizes
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;Both for &lt;span class=&#34;math inline&#34;&gt;\(G = 50\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(G = 100\)&lt;/span&gt;, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations &lt;span class=&#34;math inline&#34;&gt;\(\rho\)&lt;/span&gt;. The unadjusted CRVE estimates instead tend to under-reject.&lt;/p&gt;
+&lt;p&gt;Both for &lt;span class=&#34;math inline&#34;&gt;\(G = 50\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(G = 100\)&lt;/span&gt;, the wild cluster bootstrap and Satterthwaite corrected errors perform equally well and achieve close to 95% coverage for all intra-cluster correlations &lt;span class=&#34;math inline&#34;&gt;\(\rho\)&lt;/span&gt;. The unadjusted CRVE estimates instead tend to over-reject.&lt;/p&gt;
 &lt;p&gt;You can reproduce Figure 2 by running&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wildly_different_sim(n = 2000, n_sims = 5000, workers = 4)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Once again, note that this function will run for a very long time.&lt;/p&gt;
