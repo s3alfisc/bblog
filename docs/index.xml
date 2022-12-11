@@ -4,385 +4,84 @@
     <title></title>    <link>https://s3alfisc.github.io/blog/</link>
     <description>Recent blog posts by </description>    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Even faster Wild Cluster Bootstrap Inference in R via WildBootTests.jl 🚀</title>
-      <link>https://s3alfisc.github.io/blog/post/2022-04-18-fwildclusterboot-0-8-on-cran/</link>
-      <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
+      <title>Fast Wild Cluster Bootstrapping in Python via wildboottest 🐍</title>
+      <link>https://s3alfisc.github.io/blog/post/2022-12-11-fast-wild-cluster-bootstrap-inference-in-python-with-wildboottest/</link>
+      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://s3alfisc.github.io/blog/post/2022-04-18-fwildclusterboot-0-8-on-cran/</guid>
+      <guid>https://s3alfisc.github.io/blog/post/2022-12-11-fast-wild-cluster-bootstrap-inference-in-python-with-wildboottest/</guid>
    <description>
-&lt;script src=&#34;https://s3alfisc.github.io/blog/post/2022-04-18-fwildclusterboot-0-8-on-cran/index_files/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://s3alfisc.github.io/blog/post/2022-04-18-fwildclusterboot-0-8-on-cran/index_files/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
 
 
-&lt;p&gt;In the last few months, I have spent quite a bit of time working with a &lt;code&gt;Julia&lt;/code&gt; package - &lt;a href=&#34;https://github.com/droodman/WildBootTests.jl&#34;&gt;WildBootTests.jl&lt;/a&gt; - and towards integrating it into &lt;code&gt;fwildclusterboot&lt;/code&gt; via the awesome &lt;a href=&#34;https://github.com/stefan-m-lenz/JuliaConnectoR&#34;&gt;JuliaConnectoR&lt;/a&gt;.
-Now &lt;code&gt;fwildclusterboot&lt;/code&gt; 0.8 has made its way to &lt;a href=&#34;https://cran.rstudio.com/web/packages/fwildclusterboot/index.html&#34;&gt;CRAN&lt;/a&gt;, so I thought it would be time to convince you to install Julia and to run your wild bootstraps through &lt;code&gt;WildBootTests.jl&lt;/code&gt; - but of course, still from R. 😄&lt;/p&gt;
-&lt;div id=&#34;wildboottests.jl&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;‘WildBootTests.jl’&lt;/h2&gt;
-&lt;p&gt;A few months ago, I wrote a blog post on the outstanding speed gains that can be achieved by the ‘fast’ wild cluster bootstrap algorithm, which is implemented in R in the &lt;code&gt;fwildclusterboot&lt;/code&gt; package. In some benchmarks, &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; &lt;code&gt;boottest()&lt;/code&gt; function ran the wild cluster bootstrap &lt;a href=&#34;https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/&#34;&gt;more than 1000 times faster&lt;/a&gt; than &lt;code&gt;sandwich::vcovBS&lt;/code&gt;! Amazingly, it turns out that &lt;code&gt;WildBootTests.jl&lt;/code&gt; is &lt;strong&gt;even faster&lt;/strong&gt; than the algorithm in &lt;code&gt;fwildclusterboot&lt;/code&gt; or Stata’s &lt;code&gt;boottest&lt;/code&gt; module.&lt;/p&gt;
-&lt;p&gt;But we have all heard that &lt;code&gt;Julia&lt;/code&gt; is fast, so it’s maybe no too surprising that &lt;code&gt;WildBootTests.jl&lt;/code&gt; shines with speed. In my opinion, there are at least three other reason why it’s worth to try out &lt;code&gt;WildBootTests.jl&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://amichuda.github.io/&#34;&gt;Aleksandr Michuda&lt;/a&gt; and I have just released version 0.1 of &lt;a href=&#34;https://github.com/s3alfisc/wildboottest&#34;&gt;&lt;code&gt;wildboottest&lt;/code&gt;&lt;/a&gt; to &lt;a href=&#34;https://pypi.org/project/wildboottest/&#34;&gt;PyPi&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wildboottest&lt;/code&gt; is a Python package to conduct &lt;em&gt;fast&lt;/em&gt; wild cluster bootstrap inference in Python and implements the wild cluster bootstrap following algorithms sketched out in &lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/S2452306221001404&#34;&gt;MacKinnon (2021)&lt;/a&gt; and &lt;a href=&#34;https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1485.pdf&#34;&gt;MacKinnon, Nielsen &amp;amp; Webb, 2022 (MNW)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Most importantly, it supports all eight variants of the wild cluster bootstrap discussed in MNW as well as CRV3 inference via the cluster jackknife. Some of these new variants appear to perform even better than the “standard” (WCR11) wild cluster bootstrap in situations where the textbook CRV1 cluster robust variance estimator is known to struggle. And thanks to the excellent &lt;a href=&#34;https://github.com/numba/numba&#34;&gt;&lt;code&gt;numba&lt;/code&gt;&lt;/a&gt; library, it is actually quite fast!&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:unnamed-chunk-1&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;MNW2022.png&#34; alt=&#34;Rejection Frequencies of different Wild Cluster Bootstrap Variants (Figure from MNW (2022, full citation below). The main takeaway is that the new bootstrap variants appear to perform really, really well!&#34; width=&#34;75%&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Rejection Frequencies of different Wild Cluster Bootstrap Variants (Figure from MNW (2022, full citation below). The main takeaway is that the new bootstrap variants appear to perform really, really well!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;In terms of functionality, &lt;code&gt;wildboottest&lt;/code&gt; still lacks behind its sister packages (Stata’s &lt;a href=&#34;https://github.com/droodman/boottest&#34;&gt;boottest&lt;/a&gt;, R’s &lt;a href=&#34;https://github.com/s3alfisc/fwildclusterboot&#34;&gt;fwildcusterboot&lt;/a&gt; and Julia’s &lt;a href=&#34;https://github.com/droodman/WildBootTests.jl&#34;&gt;WildBootTests.jl&lt;/a&gt;). &lt;code&gt;wildboottest&lt;/code&gt; supports&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; is very memory efficient&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; implements the wild cluster bootstrap for IV regression by &lt;a href=&#34;https://www.tandfonline.com/doi/abs/10.1198/jbes.2009.07221&#34;&gt;Davidson &amp;amp; MacKinnon&lt;/a&gt;, and it’s blazing fast.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; allows for wild cluster bootstrapped F-tests &lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The wild cluster bootstrap for OLS (&lt;a href=&#34;https://direct.mit.edu/rest/article-abstract/90/3/414/57731/Bootstrap-Based-Improvements-for-Inference-with&#34;&gt;Cameron, Gelbach &amp;amp; Miller 2008&lt;/a&gt;, &lt;a href=&#34;https://econpapers.repec.org/paper/qedwpaper/1406.htm&#34;&gt;Roodman et al (2019)&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Multiple new versions of the wild cluster bootstrap as described in &lt;a href=&#34;https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1485.pdf&#34;&gt;MacKinnon, Nielsen &amp;amp; Webb (2022)&lt;/a&gt;, including the WCR13, WCR31, WCR33, WCU13, WCU31 and WCU33.&lt;/li&gt;
+&lt;li&gt;CRV1 and CRV3 robust variance estimation, including the CRV3-Jackknife as described in &lt;a href=&#34;https://arxiv.org/pdf/2205.03288.pdf&#34;&gt;MacKinnon, Nielsen &amp;amp; Webb (2022)&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Before I’ll start showcasing &lt;code&gt;WildBootTests.jl&lt;/code&gt;, I will quickly describe how to access &lt;code&gt;WildBootTests.jl&lt;/code&gt; from R via &lt;code&gt;fwildclusterboot&lt;/code&gt;.&lt;/p&gt;
-&lt;div id=&#34;getting-started&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Getting Started&lt;/h3&gt;
-&lt;p&gt;To run &lt;code&gt;WildBootTests.jl&lt;/code&gt; through &lt;code&gt;fwildclusterboot&lt;/code&gt;, both &lt;code&gt;Julia&lt;/code&gt; and &lt;code&gt;WildBootTests.jl&lt;/code&gt; need to be installed. The best place to install &lt;code&gt;Julia&lt;/code&gt; is its &lt;a href=&#34;https://julialang.org/&#34;&gt;homepage&lt;/a&gt; - just follow the instructions you find there. To facilitate getting started with everything else, I have written a small package, &lt;code&gt;JuliaConnectoR.utils&lt;/code&gt;, which aims to help to install &lt;code&gt;WildBootTests.jl&lt;/code&gt; and all its dependencies from within R and to connect &lt;code&gt;Julia&lt;/code&gt; and &lt;code&gt;R&lt;/code&gt; via the &lt;code&gt;JuliaConnectoR&lt;/code&gt; package.&lt;/p&gt;
-&lt;p&gt;So after installing &lt;code&gt;Julia&lt;/code&gt;, simply run &lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;s3alfisc/JuliaConnectoR.utils&amp;quot;)
+&lt;p&gt;Features that are currently not (yet) supported:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The (non-clustered) wild bootstrap for OLS (&lt;a href=&#34;https://projecteuclid.org/journals/annals-of-statistics/volume-14/issue-4/Jackknife-Bootstrap-and-Other-Resampling-Methods-in-Regression-Analysis/10.1214/aos/1176350142.full&#34;&gt;Wu, 1986&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;The subcluster bootstrap (&lt;a href=&#34;https://academic.oup.com/ectj/article-abstract/21/2/114/5078969?login=false&#34;&gt;MacKinnon and Webb 2018&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Confidence intervals formed by inverting the test and iteratively searching for bounds.&lt;/li&gt;
+&lt;li&gt;Multiway clustering.&lt;/li&gt;
+&lt;li&gt;Regression Weights (Weighted Least Squares / WLS).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can install the package from PyPi by running&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;pip install wildboottest&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here’s a small example on how to use &lt;code&gt;wildboottest&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from wildboottest.wildboottest import wildboottest
+import statsmodels.api as sm
+import numpy as np
+import pandas as pd
 
-library(JuliaConnectoR.utils)
-# connect julia and R
-connect_julia_r()
-# install WildBootTests.jl
-install_julia_packages(&amp;quot;WildBootTests.jl&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and you’re good to go and can wild cluster bootstrap via &lt;code&gt;WildBootTests.jl&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;a-first-bootstrap-via-wildboottests.jl&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;A first bootstrap via &lt;code&gt;WildBootTests.jl&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;The only required things left are a) a regression model to bootstrap and b) to specify &lt;code&gt;boottest()&#39;s&lt;/code&gt; &lt;code&gt;boot_algo&lt;/code&gt; function argument, so let’s start with simulating some data and fitting a regression:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(fwildclusterboot)
-library(modelsummary)
+# create data
+np.random.seed(12312312)
+N = 1000
+k = 10
+G = 25
+X = np.random.normal(0, 1, N * k).reshape((N,k))
+X = pd.DataFrame(X)
+X.rename(columns = {0:&amp;quot;X1&amp;quot;}, inplace = True)
+beta = np.random.normal(0,1,k)
+beta[0] = 0.005
+u = np.random.normal(0,1,N)
+Y = 1 + X @ beta + u
+cluster = np.random.choice(list(range(0,G)), N)
 
-N &amp;lt;- 100000
+# estimation
+model = sm.OLS(Y, X)
 
-data &amp;lt;- fwildclusterboot:::create_data(
-  N = N,
-  N_G1 = 50, icc1 = 0.1,
-  N_G2 = 20, icc2 = 0.8,
-  numb_fe1 = 10,
-  numb_fe2 = 10,
-  seed = 123,
-  weights = 1:N
-)
+wildboottest(model, param = &amp;quot;X1&amp;quot;, cluster = cluster, B = 9999, bootstrap_type = &amp;quot;11&amp;quot;)
+#   param              statistic   p-value
+# 0    X1  [-1.0530803154504016]  0.308831
 
-lm_fit &amp;lt;- lm(
-  proposition_vote ~ treatment + as.factor(Q1_immigration) + as.factor(Q2_defense), 
-  data
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By default, &lt;code&gt;boottest()&lt;/code&gt; will run &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; R-implementation of the wild cluster bootstrap. To run through &lt;code&gt;WildBootTests.jl&lt;/code&gt;, you have to specify the &lt;code&gt;boot_algo&lt;/code&gt; function argument:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;boot_r &amp;lt;-
-  fwildclusterboot::boottest(
-    lm_fit,
-    clustid = c(&amp;quot;group_id1&amp;quot;),
-    B = 9999,
-    param = &amp;quot;treatment&amp;quot;,
-    seed = 3,
-    nthreads = 1
-)
-    
-boot_julia &amp;lt;-
-  fwildclusterboot::boottest(
-    lm_fit,
-    clustid = c(&amp;quot;group_id1&amp;quot;),
-    B = 9999,
-    param = &amp;quot;treatment&amp;quot;,
-    seed = 3,
-    nthreads = 1, 
-    boot_algo = &amp;quot;WildBootTests.jl&amp;quot;
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that the first call of &lt;code&gt;WildBootTests.jl&lt;/code&gt; takes around 10-20 seconds to, which is due to the fact that the Julia code being run is initially pre(-JIT)-compiled.&lt;/p&gt;
-&lt;p&gt;Of course, it is good to see that the R implementation of the fast wild cluster bootstrap and &lt;code&gt;WildBootTests.jl&lt;/code&gt; lead to (almost) identical inferences:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;msummary(
-  list(
-    &amp;quot;R&amp;quot; = boot_r,
-    &amp;quot;Julia&amp;quot; = boot_julia
-  ), 
-  estimate = &amp;quot;{estimate} ({p.value})&amp;quot;, 
-  statistic = &amp;quot;[{conf.low}, {conf.high}]&amp;quot;  
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left;&#34;&gt;
-&lt;/th&gt;
-&lt;th style=&#34;text-align:center;&#34;&gt;
-R
-&lt;/th&gt;
-&lt;th style=&#34;text-align:center;&#34;&gt;
-Julia
-&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-1*treatment = 0
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.003 (0.002)
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.003 (0.001)
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;box-shadow: 0px 1px&#34;&gt;
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;box-shadow: 0px 1px&#34;&gt;
-[0.001, 0.005]
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;box-shadow: 0px 1px&#34;&gt;
-[0.001, 0.006]
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-Num.Obs.
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-100000
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-100000
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-R2
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.159
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.159
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-R2 Adj.
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.159
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-0.159
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-AIC
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
--46670.1
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
--46670.1
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-BIC
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
--46470.4
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
--46470.4
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left;&#34;&gt;
-Log.Lik.
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-23356.067
-&lt;/td&gt;
-&lt;td style=&#34;text-align:center;&#34;&gt;
-23356.067
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Now that I have shown how it works, let’s proceed to the next question: why should you install &lt;code&gt;Julia&lt;/code&gt; and run &lt;code&gt;WildBootTests.jl&lt;/code&gt; if the ‘fast’ algorithm is already implemented in ‘native’ R?&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;reason-i-it-is-extremely-fast&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Reason I: It is extremely fast&lt;/h3&gt;
-&lt;p&gt;In short: &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; R algo is fast, but we all know that &lt;code&gt;Julia&lt;/code&gt; is faster, and &lt;code&gt;WildBootTests.jl&lt;/code&gt; turns the speed of the wild cluster bootstrap from 10 to 11:&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://media.giphy.com/media/lvlLuc2zhi39C/giphy.gif&#34; alt=&#34;&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Turning the overdrive from 10 to 11 with WildBootTests.jl&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;In a blog post from a few months ago, I claimed that &lt;a href=&#34;https://s3alfisc.github.io/blog/post/1000x-faster-wild-cluster-bootstrap-inference-in-r-with-fwildclusterboot/&#34;&gt;&lt;code&gt;fwildclusterboot&lt;/code&gt; was 1000 times faster than &lt;code&gt;sandwich&#39;s&lt;/code&gt; &lt;code&gt;vcovBS()&lt;/code&gt; function&lt;/a&gt;. Below, I run the same problem, once for &lt;code&gt;boot_algo = &#34;R&#34;&lt;/code&gt; and once with &lt;code&gt;boot_algo = &#34;WildBootTests.jl&#34;&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;B &amp;lt;- 9999
+wildboottest(model, param = &amp;quot;X1&amp;quot;, cluster = cluster, B = 9999, bootstrap_type = &amp;quot;31&amp;quot;)
+#   param              statistic   p-value
+# 0    X1  [-1.0530803154504016]  0.307631
 
-bench &amp;lt;- bench::mark(
-    boot_r =
-    fwildclusterboot::boottest(
-      lm_fit,
-      clustid = c(&amp;quot;group_id1&amp;quot;),
-      B = B,
-      param = &amp;quot;treatment&amp;quot;,
-      seed = 3,
-      nthreads = 1
-    ),
-    boot_julia =
-    fwildclusterboot::boottest(
-      lm_fit,
-      clustid = c(&amp;quot;group_id1&amp;quot;),
-      B = B,
-      param = &amp;quot;treatment&amp;quot;,
-      seed = 3,
-      nthreads = 1,
-      boot_algo = &amp;quot;WildBootTests.jl&amp;quot;
-    ),
-  iterations = 3,
-  check = FALSE
-)
-
-bench&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 6
-##   expression      min   median `itr/sec` mem_alloc `gc/sec`
-##   &amp;lt;bch:expr&amp;gt; &amp;lt;bch:tm&amp;gt; &amp;lt;bch:tm&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-## 1 boot_r        737ms    758ms      1.32     304MB     6.60
-## 2 boot_julia    266ms    342ms      2.85      97MB     4.75&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For a problem that took &lt;code&gt;boottest()&#39;s&lt;/code&gt; R algorithm around 1.5 seconds, &lt;code&gt;WildBootTests.jl&lt;/code&gt; finishes in around half a second. &lt;code&gt;WildBootTests.jl&lt;/code&gt; is around 3 times faster than &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; R implementation. Benchmarked against &lt;code&gt;sandwich::vcovBS&lt;/code&gt;, &lt;code&gt;WildBootTests.jl&lt;/code&gt; is around 4500x faster!&lt;/p&gt;
-&lt;p&gt;In general, &lt;code&gt;WildBootTests.jl&lt;/code&gt; is - after compilation - at least an &lt;strong&gt;order of a magnitude&lt;/strong&gt; faster than &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; ‘R’ algorithm. Below are benchmarks from a regression with &lt;span class=&#34;math inline&#34;&gt;\(N=10000\)&lt;/span&gt; observations and &lt;span class=&#34;math inline&#34;&gt;\(k=20\)&lt;/span&gt; covariates.&lt;/p&gt;
-&lt;p&gt;While the R algorithm is competitive for ‘small’ problems, with a growing number of clusters and observations problems, &lt;code&gt;WildBootTests.jl&lt;/code&gt; clearly outperforms. For the most complex problem with &lt;span class=&#34;math inline&#34;&gt;\(G = 1000\)&lt;/span&gt; clusters and &lt;span class=&#34;math inline&#34;&gt;\(B =99999\)&lt;/span&gt; iterations, &lt;code&gt;WildBootTests.jl&lt;/code&gt; finishes in around 8 seconds, while the “R-algo” on 4 cores needs around twice as long. On one core, it runs for more than 40 seconds. And note that &lt;code&gt;WildBootTests.jl&lt;/code&gt; can also be run in parallel - check out &lt;code&gt;JuliaConnectoR.utils::set_julia_nthreads()&lt;/code&gt; for instructions on how to set the number of threads for &lt;code&gt;Julia&lt;/code&gt; from within R.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://s3alfisc.github.io/blog/post/2022-04-18-fwildclusterboot-0-8-on-cran/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;960&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wildboottests.jl-is-very-memory-efficient&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; is very memory-efficient&lt;/h3&gt;
-&lt;p&gt;A second selling point of &lt;code&gt;WildBootTests.jl&lt;/code&gt; is that it is less memory-demanding. As &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; R algorithm is fully vectorized, a large bootstrap weights matrix &lt;span class=&#34;math inline&#34;&gt;\(v^{*}\)&lt;/span&gt; of dimensions &lt;span class=&#34;math inline&#34;&gt;\(G \times B\)&lt;/span&gt; is created and stored at once. As programming in Julia is much more encouraging towards writing loops, the large matrix does not need to be created at once, which prohibits the occasional out-of-memory error that the R algorithm encounters when &lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt; get too large.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wildboottests.jl-implements-the-wild-bootstrap-for-iv&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; implements the Wild Bootstrap for IV&lt;/h3&gt;
-&lt;p&gt;Third (and maybe most importantly), &lt;code&gt;WildBootTests.jl&lt;/code&gt; offers additional functionality that has previously not been available to R users - most notably, it implements the WRE bootstrap for instrumental variable estimation from &lt;a href=&#34;https://www.tandfonline.com/doi/abs/10.1198/jbes.2009.07221&#34;&gt;Davidson &amp;amp; MacKinnon&lt;/a&gt;. David Roodman, who is &lt;code&gt;WildBootTests.jl&#39;s&lt;/code&gt; author, has spend a lot of effort on &lt;a href=&#34;https://github.com/droodman/WildBootTests.jl/blob/master/in-case-i-get-hit-by-a-bus/Faster%20IV%203.docx&#34;&gt;optimizing the WRE’s performance&lt;/a&gt;, and as a result, it is blazing fast.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nlsw88 &amp;lt;- haven::read_dta(&amp;quot;http://www.stata-press.com/data/r8/nlsw88.dta&amp;quot;)
-head(nlsw88)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 17
-##   idcode   age    race married never_married grade collgrad south    smsa c_city
-##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl+l&amp;gt; &amp;lt;dbl+l&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl+lb&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl+l&amp;gt;  &amp;lt;dbl&amp;gt;
-## 1      1    37 2 [bla~ 0 [sin~             0    12 0 [not ~     0 1 [SMS~      0
-## 2      2    37 2 [bla~ 0 [sin~             0    12 0 [not ~     0 1 [SMS~      1
-## 3      3    42 2 [bla~ 0 [sin~             1    12 0 [not ~     0 1 [SMS~      1
-## 4      4    43 1 [whi~ 1 [mar~             0    17 1 [coll~     0 1 [SMS~      0
-## 5      6    42 1 [whi~ 1 [mar~             0    12 0 [not ~     0 1 [SMS~      0
-## 6      7    39 1 [whi~ 1 [mar~             0    12 0 [not ~     0 1 [SMS~      0
-## # ... with 7 more variables: industry &amp;lt;dbl+lbl&amp;gt;, occupation &amp;lt;dbl+lbl&amp;gt;,
-## #   union &amp;lt;dbl+lbl&amp;gt;, wage &amp;lt;dbl&amp;gt;, hours &amp;lt;dbl&amp;gt;, ttl_exp &amp;lt;dbl&amp;gt;, tenure &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Currently, &lt;code&gt;fwildclusterboot&lt;/code&gt; allows to run the &lt;code&gt;WRE&lt;/code&gt; after IV-estimation via &lt;code&gt;ivreg::ivreg()&lt;/code&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ivreg)
-# test that coefficient on tenure = 0, clustering errors by industry
-iv_fit &amp;lt;- ivreg(wage ~ tenure + ttl_exp + collgrad | union + ttl_exp + collgrad, data = nlsw88)
-
-boot_iv &amp;lt;-
-boottest(
-  iv_fit,
-  param = &amp;quot;tenure&amp;quot;,
-  B = 9999,
-  clustid = &amp;quot;industry&amp;quot;
-)
-
-summary(iv_fit)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Call:
-## ivreg(formula = wage ~ tenure + ttl_exp + collgrad | union + 
-##     ttl_exp + collgrad, data = nlsw88)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -16.3074  -2.8239  -0.3707   2.3584  37.8481 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept)   4.9615     0.6206   7.994 2.27e-15 ***
-## tenure        0.7409     0.1945   3.809 0.000144 ***
-## ttl_exp      -0.2323     0.1413  -1.644 0.100439    
-## collgrad      2.9808     0.2658  11.216  &amp;lt; 2e-16 ***
-## 
-## Diagnostic tests:
-##                   df1  df2 statistic  p-value    
-## Weak instruments    1 1864     29.61 5.97e-08 ***
-## Wu-Hausman          1 1863     22.55 2.20e-06 ***
-## Sargan              0   NA        NA       NA    
-## ---
-## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
-## 
-## Residual standard error: 4.803 on 1864 degrees of freedom
-## Multiple R-Squared: -0.3255, Adjusted R-squared: -0.3277 
-## Wald test: 117.6 on 3 and 1864 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(boot_iv)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## boottest.ivreg(object = iv_fit, clustid = &amp;quot;industry&amp;quot;, param = &amp;quot;tenure&amp;quot;, 
-##     B = 9999)
-##  
-##  Hypothesis: 1*tenure = 0
-##  Observations: 1855
-##   Bootstr. Type: rademacher
-##  Clustering: 1-way
-##  Confidence Sets: 95%
-##  Number of Clusters: 12
-## &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##           term estimate statistic p.value conf.low conf.high
-## 1 1*tenure = 0    0.741     2.491   0.022    0.202     1.798&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Additionally, &lt;code&gt;WildBootTests.jl&lt;/code&gt; supports wild cluster bootstrapping of multiple joint hypotheses. E.g. to jointly test the null that &lt;code&gt;tenure = 0&lt;/code&gt; and &lt;code&gt;collgrad = 0&lt;/code&gt; after a linear regression model, one would use &lt;code&gt;fwildclusterboot&#39;s&lt;/code&gt; new &lt;code&gt;mboottest()&lt;/code&gt; function:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lm_fit &amp;lt;- lm(wage ~ tenure + ttl_exp + collgrad, data = nlsw88)
-
-boot_q2 &amp;lt;-
-mboottest(
-  lm_fit,
-  R = clubSandwich::constrain_zero(2:4, coef(lm_fit)),
-  B = 9999,
-  clustid = &amp;quot;industry&amp;quot;
-)
-
-summary(boot_q2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## mboottest.lm(object = lm_fit, clustid = &amp;quot;industry&amp;quot;, B = 9999, 
-##     R = clubSandwich::constrain_zero(2:4, coef(lm_fit)))
-##  
-##  Hypothesis: Multivariate mboottest
-##  Observations: 2217
-##   Bootstr. Type: rademacher
-##  Clustering: 1-way
-##  Number of Clusters: 12
-## &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   teststat    p_val
-## 1 56.79246 0.015625&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;WildBootTests.jl&lt;/code&gt; is outstanding software - do check it out!&lt;/p&gt;
-&lt;p&gt;P.S. If you want all you wild bootstraps to run through &lt;code&gt;WildBootTests.jl&lt;/code&gt;, you can simply set a global variable at the top of your script:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;setBoottest_boot_algo(&amp;quot;WildBootTests.jl&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Afterwards, each call to &lt;code&gt;boottest()&lt;/code&gt; will simply default to &lt;code&gt;boot_algo = &#34;WildBootTests.jl&#34;&lt;/code&gt; unless explicitly stated otherwise.&lt;/p&gt;
-&lt;!-- ## Wild Heteroskedastic Bootstrap --&gt;
-&lt;!-- As a second new feature, version 0.8 of `fwildclusterboot` now ships an implementation of the &#39;heteroskedastic&#39; wild bootstrap. --&gt;
-&lt;!-- In consequence, it is now possible to drop the `clustid` argument from `boottest()`, in which case a HC1-robust wild bootstrap is run: --&gt;
-&lt;!-- ```{r} --&gt;
-&lt;!-- boot_robust &lt;- boottest( --&gt;
-&lt;!--   lm_fit, --&gt;
-&lt;!--   param = &#34;tenure&#34;, --&gt;
-&lt;!--   B = 9999 --&gt;
-&lt;!-- ) --&gt;
-&lt;!-- boot_cluster &lt;- boottest( --&gt;
-&lt;!--   lm_fit, --&gt;
-&lt;!--   clustid = &#34;group_id1&#34;, --&gt;
-&lt;!--   param = &#34;tenure&#34;, --&gt;
-&lt;!--   B = 9999 --&gt;
-&lt;!-- ) --&gt;
-&lt;!-- msummary( --&gt;
-&lt;!--   list( --&gt;
-&lt;!--     boot_robust, --&gt;
-&lt;!--     boot_cluster --&gt;
-&lt;!--   ), --&gt;
-&lt;!--   estimate = &#34;{estimate} ({p.value})&#34;, --&gt;
-&lt;!--   statistic = &#34;[{conf.low}, {conf.high}]&#34; --&gt;
-&lt;!-- ) --&gt;
-&lt;!-- ``` --&gt;
-&lt;!-- At the moment, the wild &#39;robust&#39; bootstrap does not calculate confidence intervals - this remains future work. --&gt;
-&lt;!-- I believe that having a moderatly fast implementation of the robust wild bootstrap is a nice feature - but also useful for a new project I am working on - a package that implements [Romano-Wolf adjusted p-values based using the wild bootstrap](https://github.com/s3alfisc/wildrwolf). --&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;implemented in R via the &lt;a href=&#34;https://github.com/meghapsimatrix/wildmeta&#34;&gt;wildmeta package&lt;/a&gt;.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;of course you also have to install &lt;code&gt;fwildclusterboot&lt;/code&gt;, which you can install from CRAN, github, and r-universe.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;I plan to add support for IV estimation via &lt;code&gt;fixest&lt;/code&gt; and &lt;code&gt;lfe&lt;/code&gt; in the next weeks / months.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+wildboottest(model, param = &amp;quot;X1&amp;quot;, cluster = cluster, B = 9999, bootstrap_type = &amp;quot;33&amp;quot;)
+#   param              statistic   p-value
+# 0    X1  [-1.0394791020434824]  0.294286&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This was the first time I have worked on a Python package, and it has been quite a nice experience - after having used quite a bit of Python at work, I have now actually started to enjoy Python and object oriented programming! The wild cluster bootstrap variants really fit nicely into an OOP framework, and I am really impressed by the &lt;code&gt;numba&lt;/code&gt; jit compiler. Submitting to PyPi was a surprisingly smooth experience as well😄.&lt;/p&gt;
+&lt;p&gt;What are the next steps for &lt;code&gt;wildboottest&lt;/code&gt;? We need to close a few performance bottlenecks, in particular for the WCRx3 bootstrap types, and then I’d like to close the functionality gaps discussed above. I’d also like to allow users to call &lt;code&gt;WildBootTests.jl&lt;/code&gt;, which is just blazing fast. And optimally, we’ll make the package callable from &lt;code&gt;statsmodels&lt;/code&gt; and &lt;code&gt;linearmodels&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And no, despite having a lot of fun working on &lt;code&gt;wildboottest&lt;/code&gt; and some recent troubles of getting &lt;code&gt;fwildclusterboot&lt;/code&gt; back to CRAN, I don’t plan to stop developing in R 😄&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;MacKinnon - Fast cluster bootstrap methods for linear regression models, 2021, &lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/S2452306221001404&#34;&gt;Econometrics &amp;amp; Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MacKinnon, Nielsen &amp;amp; Webb - Fast and Reliable Jackknife and Bootstrap Methods for Cluster-Robust Inference, 2022, &lt;a href=&#34;https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1485.pdf&#34;&gt;Queens University Working Paper No 1485&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 </description>    </item>
     
@@ -397,7 +96,9 @@ summary(boot_q2)&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;A couple of months ago, Gordon Burtch shared an excellent Twitter thread on the merits of wild cluster bootstrap inference when the regression error terms are clustered into a small group of clusters:&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;How biased are clustered SEs with &amp;#39;few&amp;#39; clusters? A simulation illustrating this. DGP is y~x, 50 clusters, x is normal, true beta is 0.5. Plot of 1000 sims, beta estimate +95% CIs for each. Red = we did not cover true beta. Std SEs no good, clustered SEs yield ~95% coverage (1/6) &lt;a href=&#34;https://t.co/z3eZdy1wb1&#34;&gt;pic.twitter.com/z3eZdy1wb1&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gord Burtch (@gburtch) &lt;a href=&#34;https://twitter.com/gburtch/status/1378520203689082886?ref_src=twsrc%5Etfw&#34;&gt;April 4, 2021&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/p&gt;
 &lt;!-- &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;How biased are clustered SEs with &amp;#39;few&amp;#39; clusters? A simulation illustrating this. DGP is y~x, 50 clusters, x is normal, true beta is 0.5. Plot of 1000 sims, beta estimate +95% CIs for each. Red = we did not cover true beta. Std SEs no good, clustered SEs yield ~95% coverage (1/6) &lt;a href=&#34;https://t.co/z3eZdy1wb1&#34;&gt;pic.twitter.com/z3eZdy1wb1&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gord Burtch (@gburtch) &lt;a href=&#34;https://twitter.com/gburtch/status/1378520203689082886?ref_src=twsrc%5Etfw&#34;&gt;April 4, 2021&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;  --&gt;
 &lt;p&gt;In his simulation study, Gordon compared the performance of the wild cluster bootstrap with regular sandwich cluster robust variance estimators (CRVE). As I am quite invested in the wild cluster bootstrap, I was happy to see that it appeared to outperform ‘classical’ robust standard errors: in his simulations, the coverage rate of wild clustered bootstrapped confidence intervals is already close to the desired coverage rate of 95% even for a small number of clusters (e.g. 5-10).&lt;/p&gt;
 &lt;!-- Have you ever heard of Satterthwaite degree-of-freedom bias-corrections for cluster robust standard error estimation? --&gt;
@@ -872,20 +573,16 @@ bench3f&lt;/code&gt;&lt;/pre&gt;
       
       <guid>https://s3alfisc.github.io/blog/about/</guid>
    <description>
-&lt;script src=&#34;https://s3alfisc.github.io/blog/s3alfisc.github.io/blog/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
-&lt;p&gt;This is my private blog, in which I post about wild things in R and econometrics. I have a background in economics and work as a data scientist in Düsseldorf, Germany.&lt;/p&gt;
-&lt;div id=&#34;projects&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Projects&lt;/h2&gt;
-&lt;p&gt;I have contributed to these R packages:&lt;/p&gt;
+&lt;p&gt;Hi all, I’m Alex!&lt;/p&gt;
+&lt;p&gt;I am a data scientist at &lt;a href=&#34;http://trivago.com/&#34;&gt;trivago&lt;/a&gt;, where I work on online auctions. In my free time, I work on open source software that implements various inference procedures for linear regression (mostly in &lt;strong&gt;R&lt;/strong&gt;, but recently also in &lt;strong&gt;Python&lt;/strong&gt;).&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/s3alfisc/fwildclusterboot&#34;&gt;fwildclusterboot&lt;/a&gt;
-implements the fast wild cluster bootstrap algorithm for OLS from Roodman et al (2019) in R. &lt;a href=&#34;https://CRAN.R-project.org/package=fwildclusterboot&#34;&gt;&lt;img src=&#34;https://www.r-pkg.org/badges/version/fwildclusterboot&#34; alt=&#34;CRAN status&#34; /&gt;&lt;/a&gt; &lt;img src=&#34;https://s3alfisc.r-universe.dev/badges/fwildclusterboot&#34; alt=&#34;runiverse-package&#34; /&gt; &lt;a href=&#34;https://cran.r-project.org/package=fwildclusterboot&#34;&gt;&lt;img src=&#34;http://cranlogs.r-pkg.org/badges/grand-total/fwildclusterboot?color=blue&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=fwildclusterboot&#34;&gt;&lt;img src=&#34;http://cranlogs.r-pkg.org/badges/last-month/fwildclusterboot?color=green&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/s3alfisc/wildboottestjlr&#34;&gt;wildboottestjlr&lt;/a&gt; is an R port of &lt;a href=&#34;https://github.com/droodman/WildBootTests.jl&#34;&gt;WildBootTests.jl&lt;/a&gt;, which implements the fast wild cluster bootstrap for OLS/IV in Julia.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/s3alfisc/fwildclusterboot&#34;&gt;&lt;code&gt;fwildclusterboot&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://github.com/s3alfisc/wildboottest&#34;&gt;&lt;code&gt;wildboottest&lt;/code&gt;&lt;/a&gt; implement the fast &lt;strong&gt;wild cluster bootstrap&lt;/strong&gt; algorithm as suggested in &lt;a href=&#34;https://journals.sagepub.com/doi/abs/10.1177/1536867X19830877&#34;&gt;Roodman, MacKinnon, Nielsen &amp;amp; Webb&lt;/a&gt; and &lt;a href=&#34;https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1485.pdf&#34;&gt;MacKinnon, Nielsen &amp;amp; Webb (2022)&lt;/a&gt; in &lt;strong&gt;R&lt;/strong&gt; and &lt;strong&gt;Python&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/s3alfisc/summclust&#34;&gt;&lt;code&gt;summclust&lt;/code&gt;&lt;/a&gt; implements the &lt;strong&gt;Jackknive CRV3 estimator&lt;/strong&gt; for clustered covariances as suggested by &lt;a href=&#34;https://arxiv.org/abs/2205.03288&#34;&gt;MacKinnon, Nielsen &amp;amp; Webb (2022)&lt;/a&gt; in &lt;strong&gt;R&lt;/strong&gt;. &lt;code&gt;summclust&lt;/code&gt; further computes a range of leverage measures for cluster robust inferences (as in the &lt;a href=&#34;https://github.com/mattdwebb/summclust&#34;&gt;&lt;code&gt;summclust&lt;/code&gt;&lt;/a&gt; Stata package).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/s3alfisc/wildrwolf&#34;&gt;&lt;code&gt;wildrwolf&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://github.com/s3alfisc/wildwyoung&#34;&gt;&lt;code&gt;wildwyoung&lt;/code&gt;&lt;/a&gt; implement the multiple-hypothesis corrections by Romano &amp;amp; Wolf (2005) and Westfall and Young (1993) - as implemented in the &lt;a href=&#34;https://docs.iza.org/dp12845.pdf&#34;&gt;&lt;code&gt;rwolf&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://github.com/reifjulian/wyoung&#34;&gt;&lt;code&gt;wyoung&lt;/code&gt;&lt;/a&gt; Stata packages - for regression objects from the &lt;code&gt;fixest&lt;/code&gt; package (&lt;strong&gt;R&lt;/strong&gt;). Because both &lt;code&gt;wildrwolf&lt;/code&gt; and &lt;code&gt;wildwyoung&lt;/code&gt; are build around &lt;code&gt;fwildclusterboot&lt;/code&gt; and the wild (cluster) bootstrap, both packages are usually quite fast.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;You can find me on &lt;a href=&#34;https://github.com/s3alfisc&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://s3alfisc.r-universe.dev/ui#builds&#34;&gt;r-universe&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
 &lt;div id=&#34;other-r-blogs&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Other R-blogs&lt;/h2&gt;
 &lt;p&gt;You can find other R blogs on &lt;a href=&#34;https://r-bloggers.com&#34;&gt;r-bloggers.com&lt;/a&gt;.&lt;/p&gt;
