@@ -1,5 +1,5 @@
 ---
-title: "Fast Wild Cluster Bootstrapping in Python via `wildboottest`"
+title: Fast Wild Cluster Bootstrapping in Python via wildboottest `r emo::ji("snake")`
 author: Alexander Fischer 
 date: '2022-11-06'
 categories: [Python, econometrics, wild cluster bootstrap, statistical inference]
@@ -12,7 +12,7 @@ tags: [Python, econometrics, wild cluster bootstrap, statistical inference]
 
 Most importantly, it supports all eight variants of the wild cluster bootstrap discussed in MNW as well as CRV3 inference via the cluster jackknife. Some of these new variants appear to perform even better than the "standard" (WCR11) wild cluster bootstrap in situations where the textbook CRV1 cluster robust variance estimator is known to struggle. And thanks to the excellent [`numba`](https://github.com/numba/numba) library, it is actually quite fast!
 
-```{r , echo=FALSE, fig.cap="Rejection Frequencies of different Wild Cluster Bootstrap Variants (Figure from MNW (2022), full citation below", out.width = '75%', align="center" }
+```{r , echo=FALSE, fig.cap="Rejection Frequencies of different Wild Cluster Bootstrap Variants (Figure from MNW (2022, full citation below). The main takeaway is that the new bootstrap variants appear to perform really, really well!", out.width = '75%', align="center" }
 knitr::include_graphics("MNW2022.png")
 ```
 
@@ -36,7 +36,7 @@ You can install the package from PyPi by running
 pip install wildboottest
 ```
 
-Here's an small example how to use `wildboottest`:
+Here's a small example on how to use `wildboottest`:
 
 ```{python, eval = FALSE}
 from wildboottest.wildboottest import wildboottest
@@ -74,9 +74,12 @@ wildboottest(model, param = "X1", cluster = cluster, B = 9999, bootstrap_type = 
 # 0    X1  [-1.0394791020434824]  0.294286
 ```
 
-This was the first time I have worked on a Python package, and it has been quite a nice experience - after having used quite a bit of Python at work, I have now actually started to enjoy Python and object oriented programming! The wild cluster bootstrap variants really fit nicely into an OOP framework, and I am really impressed by the `numba` jit compiler. Submitting to PyPi was also a very nice and smooth experience =)
+This was the first time I have worked on a Python package, and it has been quite a nice experience - after having used quite a bit of Python at work, I have now actually started to enjoy Python and object oriented programming! The wild cluster bootstrap variants really fit nicely into an OOP framework, and I am really impressed by the `numba` jit compiler. Submitting to PyPi was a surprisingly smooth experience as well`r emo::ji('smile')`.
 
-So what are the next steps for `wildboottest`? We need to close a few performance bottlenecks, in particular for the WCRx3 bootstrap types, and then I'd like to add the functionality gaps discussed above. I'd also like to allow users to call `WildBootTests.jl`, which is just blazing fast.
+
+What are the next steps for `wildboottest`? We need to close a few performance bottlenecks, in particular for the WCRx3 bootstrap types, and then I'd like to close the functionality gaps discussed above. I'd also like to allow users to call `WildBootTests.jl`, which is just blazing fast. And optimally, we'll make the package callable from `statsmodels` and `linearmodels`. 
+
+And no, despite having a lot of fun working on `wildboottest` and some recent troubles of getting `fwildclusterboot` back to CRAN, I don't plan to stop developing in R `r emo::ji('smile')`
 
 ## References
 
