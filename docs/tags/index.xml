@@ -4,13 +4,61 @@
     <title></title>    <link>https://s3alfisc.github.io/blog/tags/</link>
     <description>Recent blog posts by </description>    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://s3alfisc.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>econometrics</title>
       <link>https://s3alfisc.github.io/blog/tags/econometrics/</link>
-      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/tags/econometrics/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>multiple testing</title>
+      <link>https://s3alfisc.github.io/blog/tags/multiple-testing/</link>
+      <pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/multiple-testing/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://s3alfisc.github.io/blog/tags/r/</link>
+      <pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/r/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>statistical inference</title>
+      <link>https://s3alfisc.github.io/blog/tags/statistical-inference/</link>
+      <pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/statistical-inference/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>wild cluster bootstrap</title>
+      <link>https://s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</link>
+      <pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>another tag</title>
+      <link>https://s3alfisc.github.io/blog/tags/another-tag/</link>
+      <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/another-tag/</guid>
+   <description></description>    </item>
+    
+    <item>
+      <title>one tag</title>
+      <link>https://s3alfisc.github.io/blog/tags/one-tag/</link>
+      <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://s3alfisc.github.io/blog/tags/one-tag/</guid>
    <description></description>    </item>
     
     <item>
@@ -19,22 +67,6 @@
       <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/tags/python/</guid>
-   <description></description>    </item>
-    
-    <item>
-      <title>statistical inference</title>
-      <link>https://s3alfisc.github.io/blog/tags/statistical-inference/</link>
-      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/tags/statistical-inference/</guid>
-   <description></description>    </item>
-    
-    <item>
-      <title>wild cluster bootstrap</title>
-      <link>https://s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</link>
-      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/tags/wild-cluster-bootstrap/</guid>
    <description></description>    </item>
     
     <item>
@@ -75,14 +107,6 @@
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://s3alfisc.github.io/blog/tags/julia/</guid>
-   <description></description>    </item>
-    
-    <item>
-      <title>R</title>
-      <link>https://s3alfisc.github.io/blog/tags/r/</link>
-      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://s3alfisc.github.io/blog/tags/r/</guid>
    <description></description>    </item>
     
   </channel>
