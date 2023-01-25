@@ -1,5 +1,5 @@
 ---
-title: Fast Romano-Wolf Multiple Testing Corrections for fixest
+title: Fast Romano-Wolf Multiple Testing Corrections for fixest 🐺
 author: 'Alexander Fischer'
 date: '2023-01-25'
 categories: [R, econometrics, wild cluster bootstrap, statistical inference, multiple testing]
@@ -103,7 +103,7 @@ res_rwolf &lt;- wildrwolf::rwolf(
   |                                                                            
   |======================================================================| 100%</code></pre>
 <pre class="r"><code>pracma::toc()</code></pre>
-<pre><code>## elapsed time is 4.740000 seconds</code></pre>
+<pre><code>## elapsed time is 3.980000 seconds</code></pre>
 <p>For <span class="math inline">\(N=5000\)</span> observations with <span class="math inline">\(G=100\)</span> clusters, <span class="math inline">\(S=8\)</span> hypothesis and <span class="math inline">\(B=9999\)</span> bootstrap draws, the calculation of Romano-Wolf corrected p-values takes less than 5 seconds. If you ask me, that is pretty fast! =) 🚀</p>
 <p>We can now compare the results of <code>rwolf</code> with the uncorrected p-values and another popular multiple testing adjustment, Holm’s method.</p>
 <pre class="r"><code>pvals &lt;- lapply(fit, function(x) pvalue(x)[&quot;X1&quot;]) |&gt; unlist()
@@ -119,12 +119,12 @@ round(df, 3)</code></pre>
 <pre><code>##   uncorrected  Holm rwolf
 ## 1       0.000 0.000 0.000
 ## 2       0.000 0.000 0.000
-## 3       0.140 0.420 0.365
-## 4       0.033 0.132 0.125
+## 3       0.140 0.420 0.367
+## 4       0.033 0.132 0.128
 ## 5       0.000 0.000 0.000
 ## 6       0.000 0.000 0.000
-## 7       0.398 0.420 0.401
-## 8       0.152 0.420 0.365</code></pre>
+## 7       0.398 0.420 0.394
+## 8       0.152 0.420 0.367</code></pre>
 <p>Both Holm’s method and <code>rwolf</code> produce similar corrected p-values, which - in general - are larger than the uncorrected p-values.</p>
 </div>
 <div id="but-does-it-actually-work-monte-carlo-experiments" class="section level2">
